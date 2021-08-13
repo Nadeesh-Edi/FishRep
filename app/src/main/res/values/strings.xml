@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Fish</string>
+    <string name="RegTxt">REGISTER NEW SELLER</string>
+    <string name="Nametxt">Enter name</string>
+    <string name="Idtxt">Enter NIC number</string>
+    <string name="Phonetxt">Enter phone number</string>
+    <string name="Emailtxt">Enter Email Address</string>
+    <string name="Pwdtxt">Enter a password</string>
+    <string name="RePwdtxt">Re-enter password</string>
+    <string name="RegBtntxt">Register</string>
 </resources>
