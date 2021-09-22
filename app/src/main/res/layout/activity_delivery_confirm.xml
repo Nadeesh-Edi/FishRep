@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeliveryConfirm">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/delTitle"
+        android:layout_width="324dp"
+        android:layout_height="93dp"
+        android:text="@string/DeltitleTxt"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <TextView
+        android:id="@+id/DelConfirm"
+        android:layout_width="338dp"
+        android:layout_height="53dp"
+        android:text="@string/DelConfirmMsg"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delTitle"
+        app:layout_constraintVertical_bias="0.06" />
+
+    <TextView
+        android:id="@+id/DelConfirmID"
+        android:layout_width="289dp"
+        android:layout_height="35dp"
+        android:text="@string/DelConfirmID"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DelConfirm"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <TextView
+        android:id="@+id/DelConfirmOrID"
+        android:layout_width="289dp"
+        android:layout_height="35dp"
+        android:text="@string/DelConfirmOrdID"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DelConfirmID"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <TextView
+        android:id="@+id/DelConfirmDate"
+        android:layout_width="291dp"
+        android:layout_height="38dp"
+        android:text="@string/DelConfirmDate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DelConfirmOrID"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <Button
+        android:id="@+id/OKbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DelDelete"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DelConfirmDate"
+        app:layout_constraintVertical_bias="0.194" />
+</androidx.constraintlayout.widget.ConstraintLayout>
