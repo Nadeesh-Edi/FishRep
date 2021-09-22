@@ -12,16 +12,16 @@
         <activity android:name=".DeliveryConfirm"/>
         <activity android:name=".UserAccount"/>
         <activity android:name=".Delivery"/>
-        <activity android:name=".Login"/>
-
-        <activity android:name=".RegisterSeller"
+        <activity android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            ></activity>
+        </activity>
+
+        <activity android:name=".RegisterSeller"/>
 
     </application>
 
