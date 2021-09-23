@@ -36,7 +36,6 @@ public class MyAds extends AppCompatActivity {
     String userID;
 
     ArrayList<Advertisement> list;
-    ArrayList<String> IDs;
 
     MyAdAdapter adAdapter;
     Button nav_login, nav_register;
@@ -82,8 +81,7 @@ public class MyAds extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        IDs = new ArrayList<>();
-        adAdapter = new MyAdAdapter(this, list, IDs);
+        adAdapter = new MyAdAdapter(this, list);
         recyclerView.setAdapter(adAdapter);
 
         userID = "user2";
@@ -91,9 +89,10 @@ public class MyAds extends AppCompatActivity {
         dbRef.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for(DataSnapshot ds: snapshot.getChildren()) {
-                    IDs.add(ds.getKey());
                     Advertisement ad = ds.getValue(Advertisement.class);
+                    ad.setKey(ds.getKey());
                     list.add(ad);
                 }
                 adAdapter.notifyDataSetChanged();

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -68,6 +69,12 @@ public class CreateNewAd extends AppCompatActivity {
         addImage1 = findViewById(R.id.img_btn_image1);
         addImage2 = findViewById(R.id.img_btn_image2);
         addImage3 = findViewById(R.id.img_btn_image3);
+
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
+            et_new_ad_title.setText(adDet.getTitle());
+            et_new_ad_description.setText(adDet.getDescription());
+        }
 
         ad = new Advertisement();
 

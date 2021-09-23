@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference dbRef;
     RecyclerView recyclerView;
+    DrawerLayout drawerLayout;
 
     ArrayList<Advertisement> list;
 
     AdAdapter adAdapter;
     Button nav_login, nav_register;
-    DrawerLayout drawerLayout;
     AlertDialog.Builder builder;
     ProgressBar progressBar;
 
@@ -90,9 +90,11 @@ public class MainActivity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for(DataSnapshot ds: dataSnapshot.getChildren()) {
                         Advertisement ad = ds.getValue(Advertisement.class);
+                        ad.setKey(ds.getKey());
                         list.add(ad);
                     }
                     adAdapter.notifyDataSetChanged();
@@ -104,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
         });
 
     }

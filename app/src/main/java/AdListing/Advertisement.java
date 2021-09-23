@@ -4,7 +4,9 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-public class Advertisement {
+import java.io.Serializable;
+
+public class Advertisement implements Serializable {
     private String title;
     private String location;
     private Float price;
@@ -13,7 +15,15 @@ public class Advertisement {
     private Boolean negotiable;
     private String date;
     private String imageUrlMain;
+    private String key;
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getImageUrlMain() {
         return imageUrlMain;

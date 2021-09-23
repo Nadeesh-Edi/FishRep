@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,10 +37,9 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
     String userID;
     private static final String TAG = "MyAdAdapter";
 
-    public MyAdAdapter(Context context, ArrayList<Advertisement> list, ArrayList<String> IDs) {
+    public MyAdAdapter(Context context, ArrayList<Advertisement> list) {
         this.context = context;
         this.list = list;
-        this.IDs = IDs;
     }
 
     @NonNull
@@ -63,23 +63,24 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                builder = new AlertDialog.Builder(context.getApplicationContext());
-//                builder.setMessage("Are you sure you want to delete this?")
-//                        .setCancelable(false)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                // Remove data from database
+                builder = new AlertDialog.Builder(context);
+                builder.setTitle("Delete Advertisement").setMessage("Are you sure you want to delete this?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // Remove data from database
                                 userID = "user2";
                                 DatabaseReference databaseReference =
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child(childRef)
                                                 .child(userID)
-                                                .child(IDs.get(position));
+                                                .child(ad.getKey());
                                 databaseReference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(context, "Delete Successful!", Toast.LENGTH_SHORT).show();
+                                        notifyItemRemoved(position);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -87,8 +88,27 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
                                         Toast.makeText(context, "Not deleted!", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-//                            }
-//                        });
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Cancel delete
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        holder.changeDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CreateNewAd.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("AD", ad);
+
+                view.getContext().startActivity(intent);
             }
         });
 
