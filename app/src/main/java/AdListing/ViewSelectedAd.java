@@ -2,6 +2,7 @@ package AdListing;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,5 +46,9 @@ public class ViewSelectedAd extends AppCompatActivity {
         Glide.with(ViewSelectedAd.this).load(mainImageURL).into(mainImage);
 
 
+    }
+
+    public void goBack(View view) {
+        finish();
     }
 }

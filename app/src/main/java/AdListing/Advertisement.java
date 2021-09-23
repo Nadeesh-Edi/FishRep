@@ -4,6 +4,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 
 public class Advertisement implements Serializable {
@@ -15,6 +17,11 @@ public class Advertisement implements Serializable {
     private Boolean negotiable;
     private String date;
     private String imageUrlMain;
+    private String image2;
+    private String image3;
+
+
+    @Exclude
     private String key;
 
     public String getKey() {
@@ -23,6 +30,22 @@ public class Advertisement implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
+
+    public String getImage3() {
+        return image3;
+    }
+
+    public void setImage3(String image3) {
+        this.image3 = image3;
     }
 
     public String getImageUrlMain() {

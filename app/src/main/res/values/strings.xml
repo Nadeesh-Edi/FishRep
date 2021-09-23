@@ -72,6 +72,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="tv_ad_box_date">yyyy-mm-dd</string>
+    <string name="main_img">Main Image</string>
 
     <string-array name="districts">
     <item>Select your district</item>

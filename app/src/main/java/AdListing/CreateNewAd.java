@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 import com.example.fish.R;
 
 public class CreateNewAd extends AppCompatActivity {
+
+    ///////// BOTH CREATE NEW ADVERTISEMENT AND UPDATE AN EXISTING ADVERTISEMENT /////////
 
     EditText et_new_ad_title, et_new_ad_price, et_new_ad_contact, et_new_ad_description;
     Spinner select_location_search;
@@ -74,6 +77,11 @@ public class CreateNewAd extends AppCompatActivity {
 
         // When editing an advertisement these codes will run
         if (getIntent() != null && getIntent().getExtras() != null) {
+
+            TextView tv_create_ad = findViewById(R.id.tv_create_ad);
+            String updateDetails = "Update Details";
+            tv_create_ad.setText(updateDetails);
+
             Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
 
             String title = adDet.getTitle();
@@ -224,8 +232,8 @@ public class CreateNewAd extends AppCompatActivity {
     private void uploadFirebase(Uri uri) {
         String adID = dbRef.push().getKey();
         assert adID != null;
-        StorageReference fileRef = storageReference.child(childRef).child(userID).child(adID).child("MainImage");
-        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        StorageReference fileRef = storageReference.child(childRef).child(userID).child(adID);
+        fileRef.child("MainImage").putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
