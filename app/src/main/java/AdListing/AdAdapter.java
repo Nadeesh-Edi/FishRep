@@ -1,5 +1,6 @@
 package AdListing;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         return  new AdViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull AdViewHolder holder, int position) {
 

@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -58,8 +60,11 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
         holder.price.setText(ad.getPrice().toString());
 //            holder.date.setText(ad.getDate());
 
+        String adKey = ad.getKey();
+
         Glide.with(context).load(list.get(position).getImageUrlMain()).into(holder.imageView);
 
+        // On click delete button
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,18 +74,25 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // Remove data from database
+
                                 userID = "user2";
+
+                                // Remove data from database
                                 DatabaseReference databaseReference =
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child(childRef)
                                                 .child(userID)
-                                                .child(ad.getKey());
+                                                .child(adKey);
                                 databaseReference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+
+                                        // Delete images from firebase storage
+                                        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                                                .child(childRef).child(userID).child(adKey).child("MainImage");
+                                        storageReference.delete();
+
                                         Toast.makeText(context, "Delete Successful!", Toast.LENGTH_SHORT).show();
-                                        notifyItemRemoved(position);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

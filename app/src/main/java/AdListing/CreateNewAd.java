@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +41,7 @@ public class CreateNewAd extends AppCompatActivity {
     Spinner select_location_search;
     Button btn_submit_ad;
     ImageView addImage1, addImage2, addImage3;
-    CheckBox negotiable;
+    CheckBox chk_negotiable;
     Boolean negotiable_value = false;
 
     ProgressBar progressBar;
@@ -61,7 +63,7 @@ public class CreateNewAd extends AppCompatActivity {
         et_new_ad_contact = findViewById(R.id.et_new_ad_contact);
         et_new_ad_description = findViewById(R.id.et_new_ad_description);
         select_location_search = (Spinner) findViewById(R.id.select_location_search);
-        negotiable = (CheckBox) findViewById(R.id.chk_negotiable);
+        chk_negotiable = (CheckBox) findViewById(R.id.chk_negotiable);
 
         btn_submit_ad = findViewById(R.id.btn_submit_ad);
         progressBar = findViewById(R.id.progress_bar);
@@ -70,10 +72,38 @@ public class CreateNewAd extends AppCompatActivity {
         addImage2 = findViewById(R.id.img_btn_image2);
         addImage3 = findViewById(R.id.img_btn_image3);
 
+        // When editing an advertisement these codes will run
         if (getIntent() != null && getIntent().getExtras() != null) {
             Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
-            et_new_ad_title.setText(adDet.getTitle());
-            et_new_ad_description.setText(adDet.getDescription());
+
+            String title = adDet.getTitle();
+            String price = adDet.getPrice().toString();
+            String contact = adDet.getContact().toString();
+            String description = adDet.getDescription();
+            String compareValue = adDet.getLocation();
+            String image1 = adDet.getImageUrlMain();
+            Boolean negotiable = adDet.getNegotiable();
+
+            // Set edit text values
+            et_new_ad_title.setText(title);
+            et_new_ad_price.setText(price);
+            et_new_ad_contact.setText(contact);
+            et_new_ad_description.setText(description);
+
+            // Set spinner value
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.districts, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            select_location_search.setAdapter(adapter);
+            if (compareValue != null) {
+                int spinnerPosition = adapter.getPosition(compareValue);
+                select_location_search.setSelection(spinnerPosition);
+            }
+
+            // Set Images
+            Glide.with(CreateNewAd.this).load(image1).into(addImage1);
+
+            // Set negotiable checkbox
+            chk_negotiable.setChecked(negotiable);
         }
 
         ad = new Advertisement();
@@ -104,10 +134,10 @@ public class CreateNewAd extends AppCompatActivity {
         });
 
         // if negotiable check box checked value get true
-        negotiable.setOnClickListener(new View.OnClickListener() {
+        chk_negotiable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(negotiable.isChecked()) {
+                if(chk_negotiable.isChecked()) {
                     negotiable_value = true;
                 }
             }
@@ -168,7 +198,7 @@ public class CreateNewAd extends AppCompatActivity {
             else if(TextUtils.isEmpty(description)){
                 et_new_ad_description.setError("Description is required!");
             }
-            else if(imgURI1 == null) {
+            else if(imgURI1.equals(Uri.EMPTY)) {
                 Toast.makeText(CreateNewAd.this, "Main image required!", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -181,7 +211,7 @@ public class CreateNewAd extends AppCompatActivity {
                 ad.setNegotiable(negotiable_value);
                 ad.setDate();
 
-                // Upload image to firebase and save database
+                // Upload image to firebase and save database if main image upload success
                 uploadFirebase(imgURI1);
 
             }
@@ -192,7 +222,9 @@ public class CreateNewAd extends AppCompatActivity {
 
     // Upload images to firebase storage and get the url
     private void uploadFirebase(Uri uri) {
-        StorageReference fileRef = storageReference.child(childRef).child(userID).child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        String adID = dbRef.push().getKey();
+        assert adID != null;
+        StorageReference fileRef = storageReference.child(childRef).child(userID).child(adID).child("MainImage");
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -204,7 +236,7 @@ public class CreateNewAd extends AppCompatActivity {
                         ad.setImageUrlMain(uri.toString());
 
                         // Save data in the database
-                        dbRef.child(userID).push().setValue(ad)
+                        dbRef.child(userID).child(adID).setValue(ad)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -242,9 +274,7 @@ public class CreateNewAd extends AppCompatActivity {
     private String getFileExtension(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        String extension = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-        System.out.println(extension);
-        return extension;
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     public void goBack(View view) {
