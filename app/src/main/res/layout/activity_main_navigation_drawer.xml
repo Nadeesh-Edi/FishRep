@@ -18,7 +18,8 @@
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/main_color"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_marginLeft="25dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nav_register"
@@ -30,7 +31,8 @@
         android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="@color/cancel_red"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_marginLeft="25dp" />
 
     <View
         android:layout_width="match_parent"
@@ -57,7 +59,8 @@
             android:text="@string/home"
             android:textColor="@color/black01"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="16dp" />
 
     </LinearLayout>
 
@@ -79,7 +82,8 @@
             android:text="@string/post_ad"
             android:textColor="@color/black01"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="16dp" />
 
     </LinearLayout>
 
@@ -101,7 +105,8 @@
             android:text="@string/my_advertisement"
             android:textColor="@color/black01"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="16dp" />
 
     </LinearLayout>
 
@@ -122,7 +127,8 @@
             android:text="@string/orders"
             android:textColor="@color/black01"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="16dp" />
 
     </LinearLayout>
 
@@ -146,7 +152,8 @@
             android:layout_height="50dp"
             android:layout_marginStart="25dp"
             android:contentDescription="@string/profile"
-            android:src="@drawable/ic_baseline_account_circle_24" />
+            android:src="@drawable/ic_baseline_account_circle_24"
+            android:layout_marginLeft="25dp" />
 
         <TextView
             android:id="@+id/nav_profile_txt"

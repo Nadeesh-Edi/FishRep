@@ -23,7 +23,8 @@
         android:textColor="@color/black01"
         android:layout_weight="1"
         android:alpha="0.8"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:gravity="center_horizontal" />
 
 
 </LinearLayout>

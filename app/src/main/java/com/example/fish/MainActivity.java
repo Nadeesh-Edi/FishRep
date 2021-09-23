@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     Button nav_login, nav_register;
     DrawerLayout drawerLayout;
     AlertDialog.Builder builder;
+    ProgressBar progressBar;
 
 
     @Override
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         nav_login = findViewById(R.id.nav_login);
         nav_register = findViewById(R.id.nav_register);
+        progressBar = findViewById(R.id.progress_bar);
 
         // Check network connectivity
         boolean connected = false;
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             builder.setMessage("Not Connected to Network");
             builder.setCancelable(false);
             AlertDialog alert11 = builder.create();
+            progressBar.setVisibility(View.INVISIBLE);
             alert11.show();
         }
 
@@ -93,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     adAdapter.notifyDataSetChanged();
                 }
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -106,17 +111,23 @@ public class MainActivity extends AppCompatActivity {
 
     // ------------------------- START NAVIGATION DRAWER ---------------------------------------
     public void navClickHome(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+        Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickPostAd(View view) {
-        startActivity(new Intent(getApplicationContext(), CreateNewAd.class));
+        Intent openMainActivity = new Intent(getApplicationContext(), CreateNewAd.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 1);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickMyAd(View view) {
-        startActivity(new Intent(getApplicationContext(), MyAds.class));
+        Intent openMainActivity = new Intent(getApplicationContext(), MyAds.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 2);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
@@ -138,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
+            finish();
             super.onBackPressed();
         }
     }

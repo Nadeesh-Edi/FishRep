@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,11 +36,13 @@ public class MyAds extends AppCompatActivity {
     String userID;
 
     ArrayList<Advertisement> list;
+    ArrayList<String> IDs;
 
-    AdAdapter adAdapter;
+    MyAdAdapter adAdapter;
     Button nav_login, nav_register;
     DrawerLayout drawerLayout;
     AlertDialog.Builder builder;
+    ProgressBar progressBar;
 
 
     @Override
@@ -52,6 +55,7 @@ public class MyAds extends AppCompatActivity {
 
         nav_login = findViewById(R.id.nav_login);
         nav_register = findViewById(R.id.nav_register);
+        progressBar = findViewById(R.id.progress_bar);
 
         // Check network connectivity
         boolean connected = false;
@@ -78,7 +82,8 @@ public class MyAds extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        adAdapter = new AdAdapter(this, list);
+        IDs = new ArrayList<>();
+        adAdapter = new MyAdAdapter(this, list, IDs);
         recyclerView.setAdapter(adAdapter);
 
         userID = "user2";
@@ -87,9 +92,12 @@ public class MyAds extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()) {
+                    IDs.add(ds.getKey());
                     Advertisement ad = ds.getValue(Advertisement.class);
                     list.add(ad);
                 }
+                adAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -98,21 +106,29 @@ public class MyAds extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     // ------------------------- START NAVIGATION DRAWER ---------------------------------------
     public void navClickHome(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+        Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickPostAd(View view) {
-        startActivity(new Intent(getApplicationContext(), CreateNewAd.class));
+        Intent openMainActivity = new Intent(getApplicationContext(), CreateNewAd.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 1);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickMyAd(View view) {
-        startActivity(new Intent(getApplicationContext(), MyAds.class));
+        Intent openMainActivity = new Intent(getApplicationContext(), MyAds.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 2);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 

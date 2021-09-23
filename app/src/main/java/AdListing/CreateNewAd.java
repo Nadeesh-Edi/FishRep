@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -37,6 +38,8 @@ public class CreateNewAd extends AppCompatActivity {
     Spinner select_location_search;
     Button btn_submit_ad;
     ImageView addImage1, addImage2, addImage3;
+    CheckBox negotiable;
+    Boolean negotiable_value = false;
 
     ProgressBar progressBar;
     Uri imgURI1 = Uri.EMPTY, imgURI2 = Uri.EMPTY, imgURI3 = Uri.EMPTY;
@@ -45,7 +48,7 @@ public class CreateNewAd extends AppCompatActivity {
     StorageReference storageReference;
     Advertisement ad;
     String userID;
-    String childName = "Advertisement";
+    String childRef = "Advertisement";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,10 @@ public class CreateNewAd extends AppCompatActivity {
         et_new_ad_contact = findViewById(R.id.et_new_ad_contact);
         et_new_ad_description = findViewById(R.id.et_new_ad_description);
         select_location_search = (Spinner) findViewById(R.id.select_location_search);
+        negotiable = (CheckBox) findViewById(R.id.chk_negotiable);
+
         btn_submit_ad = findViewById(R.id.btn_submit_ad);
         progressBar = findViewById(R.id.progress_bar);
-        progressBar.setVisibility(View.INVISIBLE);
 
         addImage1 = findViewById(R.id.img_btn_image1);
         addImage2 = findViewById(R.id.img_btn_image2);
@@ -91,6 +95,18 @@ public class CreateNewAd extends AppCompatActivity {
                 startActivityForResult(open_Gallery, 3);
             }
         });
+
+        // if negotiable check box checked value get true
+        negotiable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(negotiable.isChecked()) {
+                    negotiable_value = true;
+                }
+            }
+        });
+
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     // Preview images in ImageButtons
@@ -114,7 +130,7 @@ public class CreateNewAd extends AppCompatActivity {
     // Set Advertisement data
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveData(View view) {
-        dbRef = FirebaseDatabase.getInstance().getReference().child(childName);
+        dbRef = FirebaseDatabase.getInstance().getReference().child(childRef);
         storageReference = FirebaseStorage.getInstance().getReference();
 
         try{
@@ -123,6 +139,7 @@ public class CreateNewAd extends AppCompatActivity {
             String price= et_new_ad_price.getText().toString();
             String contact = et_new_ad_contact.getText().toString();
             String description = et_new_ad_description.getText().toString();
+
 
             // Get the current user
             userID = "user2";
@@ -154,7 +171,7 @@ public class CreateNewAd extends AppCompatActivity {
                 ad.setPrice(Float.valueOf(price.trim()));
                 ad.setContact(Integer.valueOf(contact.trim()));
                 ad.setDescription(description.trim());
-                ad.setNegotiable(Boolean.TRUE);
+                ad.setNegotiable(negotiable_value);
                 ad.setDate();
 
                 // Upload image to firebase and save database
@@ -168,7 +185,7 @@ public class CreateNewAd extends AppCompatActivity {
 
     // Upload images to firebase storage and get the url
     private void uploadFirebase(Uri uri) {
-        StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        StorageReference fileRef = storageReference.child(childRef).child(userID).child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

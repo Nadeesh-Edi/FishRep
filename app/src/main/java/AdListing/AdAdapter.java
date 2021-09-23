@@ -1,6 +1,7 @@
 package AdListing;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,25 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         holder.date.setText(ad.getDate());
 
         Glide.with(context).load(list.get(position).getImageUrlMain()).into(holder.imageView);
+
+        // Send data to the selected ad view when select on the ad
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ViewSelectedAd.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("Title", ad.getTitle());
+                intent.putExtra("Location", ad.getLocation());
+                intent.putExtra("Contact", ad.getContact().toString());
+                intent.putExtra("Price", ad.getPrice().toString());
+                intent.putExtra("Date", ad.getDate());
+                intent.putExtra("Description", ad.getDescription());
+                intent.putExtra("MainImage", ad.getImageUrlMain());
+
+                view.getContext().startActivity(intent);
+
+            }
+        });
 
     }
 

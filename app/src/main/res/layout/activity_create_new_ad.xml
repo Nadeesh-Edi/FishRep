@@ -15,7 +15,8 @@
         android:onClick="goBack"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <View
         android:id="@+id/view3"
@@ -36,7 +37,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/menu_bar_back_btn"
         app:layout_constraintStart_toEndOf="@+id/menu_bar_back_btn"
-        app:layout_constraintTop_toTopOf="@+id/menu_bar_back_btn" />
+        app:layout_constraintTop_toTopOf="@+id/menu_bar_back_btn"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -48,7 +50,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toBottomOf="@+id/view3"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -109,7 +112,9 @@
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp" />
 
     <EditText
         android:id="@+id/et_new_ad_title"
@@ -125,7 +130,8 @@
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/et_new_ad_price" />
+        app:layout_constraintStart_toStartOf="@+id/et_new_ad_price"
+        android:layout_marginRight="16dp" />
 
     <EditText
         android:id="@+id/et_new_ad_contact"
@@ -154,7 +160,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/et_new_ad_title"
         app:layout_constraintStart_toStartOf="@+id/et_new_ad_title"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        android:paddingLeft="8dp"
+        android:paddingRight="15dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -163,7 +171,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/select_location_search"
         app:layout_constraintEnd_toEndOf="@+id/select_location_search"
         app:layout_constraintTop_toTopOf="@+id/select_location_search"
-        app:srcCompat="@drawable/round_arrow_drop_down_20" />
+        app:srcCompat="@drawable/round_arrow_drop_down_20"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageButton
         android:id="@+id/img_btn_image1"
@@ -173,7 +182,8 @@
         app:layout_constraintEnd_toStartOf="@+id/img_btn_image2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageButton
         android:id="@+id/img_btn_image2"
@@ -183,7 +193,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_btn_image1"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageButton
         android:id="@+id/img_btn_image3"
@@ -193,7 +204,8 @@
         app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toEndOf="@+id/img_btn_image2"
         app:layout_constraintTop_toTopOf="@+id/img_btn_image2"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/textView7"
@@ -224,7 +236,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/img_btn_image1"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        android:layout_marginRight="16dp" />
 
     <CheckBox
         android:id="@+id/chk_negotiable"
@@ -254,7 +267,10 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel_ad"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_negotiable" />
+        app:layout_constraintTop_toBottomOf="@+id/chk_negotiable"
+        android:drawableLeft="@drawable/ic_baseline_check_24"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cancel_ad"
@@ -275,7 +291,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_submit_ad"
-        app:layout_constraintTop_toBottomOf="@+id/chk_negotiable" />
+        app:layout_constraintTop_toBottomOf="@+id/chk_negotiable"
+        android:drawableLeft="@drawable/ic_baseline_remove_circle_outline_24"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
