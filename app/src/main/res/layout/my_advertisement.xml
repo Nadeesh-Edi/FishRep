@@ -41,7 +41,6 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/_22_1223498_png_clip_art_and_cartoon_fish_clipart"
                 android:layout_marginLeft="8dp" />
 
             <TextView
@@ -129,6 +128,16 @@
                 app:layout_constraintEnd_toStartOf="@+id/btn_delete_ad"
                 app:layout_constraintTop_toTopOf="@+id/btn_delete_ad"
                 android:layout_marginRight="16dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/ad_box_img"
+                app:layout_constraintEnd_toEndOf="@+id/ad_box_img"
+                app:layout_constraintStart_toStartOf="@+id/ad_box_img"
+                app:layout_constraintTop_toTopOf="@+id/ad_box_img" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

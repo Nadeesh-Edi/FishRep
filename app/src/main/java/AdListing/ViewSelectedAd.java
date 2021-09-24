@@ -1,15 +1,18 @@
 package AdListing;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.fish.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -24,12 +27,15 @@ public class ViewSelectedAd extends AppCompatActivity {
     String userID;
     String childRef = "Advertisement";
     String adID;
+    ProgressBar progressBar;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_selected_ad);
+        progressBar = findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.VISIBLE);
 
         Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
         adID = adDet.getKey();
@@ -45,7 +51,6 @@ public class ViewSelectedAd extends AppCompatActivity {
         image2URL = getImages.child("Image2").toString();
         image3URL = getImages.child("Image3").toString();
 
-
         tv_title = findViewById(R.id.tv_selected_ad_title2);
         tv_location = findViewById(R.id.tv_selected_ad_location);
         tv_contact = findViewById(R.id.tv_selected_ad_contact);
@@ -59,9 +64,17 @@ public class ViewSelectedAd extends AppCompatActivity {
         tv_price.setText(price);
         tv_description.setText(description);
 
-        Glide.with(ViewSelectedAd.this).load(mainImageURL).into(mainImage);
-
-
+//        Glide.with(ViewSelectedAd.this).load(mainImageURL).into(mainImage);
+        // Set Image
+        getImages.child("MainImage").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                if (!uri.equals(Uri.EMPTY)) {
+                    Glide.with(ViewSelectedAd.this).load(uri.toString()).into(mainImage);
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     public void goBack(View view) {

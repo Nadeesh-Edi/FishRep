@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
     @Override
     public void onBindViewHolder(@NonNull AdListing.MyAdAdapter.AdViewHolder holder, int position) {
 
+        holder.progressBar.setVisibility(View.VISIBLE);
         Advertisement ad = list.get(position);
         holder.title.setText(ad.getTitle());
         holder.location.setText(ad.getLocation());
@@ -75,6 +77,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
             public void onSuccess(Uri uri) {
                 if (!uri.equals(Uri.EMPTY)) {
                     Glide.with(context).load(uri.toString()).into(holder.imageView);
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -155,6 +158,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
         TextView title, location, price, date;
         ImageView imageView, deleteButton;
         Button changeDetails;
+        ProgressBar progressBar;
 
         public AdViewHolder(@NonNull View adView) {
             super(adView);
@@ -166,6 +170,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
             imageView = adView.findViewById(R.id.ad_box_img);
             changeDetails = adView.findViewById(R.id.btn_chanege_details);
             deleteButton = adView.findViewById(R.id.btn_delete_ad);
+            progressBar = adView.findViewById(R.id.progressBar2);
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,11 +96,12 @@ public class MainActivity extends AppCompatActivity {
             nav_logout.setVisibility(View.GONE);
         }
 
-
-
         recyclerView = findViewById(R.id.ad_listning_recyclerview);
         dbRef = FirebaseDatabase.getInstance().getReference("Advertisement");
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         list = new ArrayList<>();
         adAdapter = new AdAdapter(this, list);
@@ -111,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for(DataSnapshot ds: dataSnapshot.getChildren()) {
                         Advertisement ad = ds.getValue(Advertisement.class);
-                        assert ad != null;
                         ad.setKey(ds.getKey());
                         ad.setUID(dataSnapshot.getKey());
                         list.add(ad);

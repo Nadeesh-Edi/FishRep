@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AdViewHolder holder, int position) {
 
+        holder.progressBar.setVisibility(View.VISIBLE);
         Advertisement ad = list.get(position);
         holder.title.setText(ad.getTitle());
         holder.location.setText(ad.getLocation());
@@ -54,7 +56,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
         String adKey = ad.getKey();
         firebaseAuth = FirebaseAuth.getInstance();
-        userID = firebaseAuth.getCurrentUser().getUid();
+        userID = ad.getUID();
         StorageReference storageReference = FirebaseStorage.getInstance().getReference()
                 .child(childRef).child(userID).child(adKey);
 
@@ -64,6 +66,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
             public void onSuccess(Uri uri) {
                 if (!uri.equals(Uri.EMPTY)) {
                     Glide.with(context).load(uri.toString()).into(holder.imageView);
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -93,6 +96,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
         TextView title, location, price, date;
         ImageView imageView;
+        ProgressBar progressBar;
 
         public AdViewHolder(@NonNull View adView) {
             super(adView);
@@ -102,6 +106,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
             price = adView.findViewById(R.id.tv_ad_box_price);
             date = adView.findViewById(R.id.tv_ad_box_date);
             imageView = adView.findViewById(R.id.ad_box_img);
+            progressBar = adView.findViewById(R.id.progressBar);
         }
     }
 }
