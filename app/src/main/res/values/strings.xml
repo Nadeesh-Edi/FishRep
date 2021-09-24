@@ -33,8 +33,9 @@
     <string name="RegMenu">Register</string>
     <string name="et_text1">Name</string>
     <string name="DelDelete">Delete Delivery Order</string>
+    <string name="SignUpBtn">Register as New User</string>
 
-
+  
 <!--- Sachintha -->
     <string name="select_location">Select Your Location</string>
     <string name="search">Search</string>
@@ -102,4 +103,5 @@
     <item>Trincomalee</item>
     <item>Vavuniya</item>
     </string-array>
+
 </resources>
