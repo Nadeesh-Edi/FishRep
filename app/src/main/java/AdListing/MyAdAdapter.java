@@ -61,6 +61,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
 //            holder.date.setText(ad.getDate());
 
         String adKey = ad.getKey();
+        ad.setKey(adKey);
 
         Glide.with(context).load(list.get(position).getImageUrlMain()).into(holder.imageView);
 

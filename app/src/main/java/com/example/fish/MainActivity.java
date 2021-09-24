@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for(DataSnapshot ds: dataSnapshot.getChildren()) {
                         Advertisement ad = ds.getValue(Advertisement.class);
+                        assert ad != null;
                         ad.setKey(ds.getKey());
                         list.add(ad);
                     }

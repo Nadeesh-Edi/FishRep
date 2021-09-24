@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -46,20 +46,27 @@ public class CreateNewAd extends AppCompatActivity {
     ImageView addImage1, addImage2, addImage3;
     CheckBox chk_negotiable;
     Boolean negotiable_value = false;
+    private static final String TAG = "CreateAd/EditAd";
 
     ProgressBar progressBar;
     Uri imgURI1 = Uri.EMPTY, imgURI2 = Uri.EMPTY, imgURI3 = Uri.EMPTY;
 
-    DatabaseReference dbRef;
-    StorageReference storageReference;
+    private DatabaseReference dbRef;
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();;
     Advertisement ad;
     String userID;
     String childRef = "Advertisement";
+    String adID;
+    Boolean isNew = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_ad);
+
+        // Get the current user
+        userID = "user2";
 
         et_new_ad_title = findViewById(R.id.et_new_ad_title);
         et_new_ad_price = findViewById(R.id.et_new_ad_price);
@@ -77,12 +84,15 @@ public class CreateNewAd extends AppCompatActivity {
 
         // When editing an advertisement these codes will run
         if (getIntent() != null && getIntent().getExtras() != null) {
+            Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
+            StorageReference getImages = storageReference.child(childRef).child(userID).child(adDet.getKey());
+            isNew = false;
+            adID = adDet.getKey();
 
             TextView tv_create_ad = findViewById(R.id.tv_create_ad);
             String updateDetails = "Update Details";
             tv_create_ad.setText(updateDetails);
 
-            Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
 
             String title = adDet.getTitle();
             String price = adDet.getPrice().toString();
@@ -108,7 +118,34 @@ public class CreateNewAd extends AppCompatActivity {
             }
 
             // Set Images
-            Glide.with(CreateNewAd.this).load(image1).into(addImage1);
+            getImages.child("MainImage").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (!uri.equals(Uri.EMPTY)) {
+                        Glide.with(CreateNewAd.this).load(uri.toString()).into(addImage1);
+                        imgURI1 = uri;
+                    }
+                }
+            });
+            getImages.child("Image2").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (!uri.equals(Uri.EMPTY)) {
+                        Glide.with(CreateNewAd.this).load(uri.toString()).into(addImage2);
+                        imgURI2 = uri;
+                    }
+                }
+            });
+            getImages.child("Image3").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if (!uri.equals(Uri.EMPTY)) {
+                        Glide.with(CreateNewAd.this).load(uri.toString()).into(addImage3);
+                        imgURI3 = uri;
+                    }
+                }
+            });
+
 
             // Set negotiable checkbox
             chk_negotiable.setChecked(negotiable);
@@ -176,7 +213,6 @@ public class CreateNewAd extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveData(View view) {
         dbRef = FirebaseDatabase.getInstance().getReference().child(childRef);
-        storageReference = FirebaseStorage.getInstance().getReference();
 
         try{
             String title = et_new_ad_title.getText().toString();
@@ -185,9 +221,6 @@ public class CreateNewAd extends AppCompatActivity {
             String contact = et_new_ad_contact.getText().toString();
             String description = et_new_ad_description.getText().toString();
 
-
-            // Get the current user
-            userID = "user2";
 
             // Check required fields
             if(TextUtils.isEmpty(title)){
@@ -220,6 +253,7 @@ public class CreateNewAd extends AppCompatActivity {
                 ad.setDate();
 
                 // Upload image to firebase and save database if main image upload success
+                Log.d(TAG, imgURI1.toString());
                 uploadFirebase(imgURI1);
 
             }
@@ -230,10 +264,11 @@ public class CreateNewAd extends AppCompatActivity {
 
     // Upload images to firebase storage and get the url
     private void uploadFirebase(Uri uri) {
-        String adID = dbRef.push().getKey();
+        if (isNew)
+            adID = dbRef.push().getKey();
         assert adID != null;
-        StorageReference fileRef = storageReference.child(childRef).child(userID).child(adID);
-        fileRef.child("MainImage").putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        StorageReference fileRef = storageReference.child(childRef).child(userID).child(adID).child("MainImage");
+        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -242,6 +277,17 @@ public class CreateNewAd extends AppCompatActivity {
 
                         // Add image url to the advertisement
                         ad.setImageUrlMain(uri.toString());
+
+                        // Upload 2nd image
+                        if (!imgURI2.equals(Uri.EMPTY)){
+                            StorageReference storageRef2 = storageReference.child(childRef).child(userID).child(adID).child("Image2");
+                            storageRef2.putFile(imgURI2);
+                        }
+                        // Upload 3rd image
+                        if (!imgURI3.equals(Uri.EMPTY)) {
+                            StorageReference storageRef3 = storageReference.child(childRef).child(userID).child(adID).child("Image3");
+                            storageRef3.putFile(imgURI3);
+                        }
 
                         // Save data in the database
                         dbRef.child(userID).child(adID).setValue(ad)
@@ -276,13 +322,6 @@ public class CreateNewAd extends AppCompatActivity {
                 Toast.makeText(CreateNewAd.this,"Uploading Faild!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    // Get the file extension
-    private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     public void goBack(View view) {
