@@ -71,7 +71,7 @@
     <string name="profile">Profile</string>
     <string name="orders">Orders</string>
     <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="logout">Logout</string>
     <string name="tv_ad_box_date">yyyy-mm-dd</string>
     <string name="main_img">Main Image</string>
 

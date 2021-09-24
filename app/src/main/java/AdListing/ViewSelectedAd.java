@@ -10,12 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.fish.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ViewSelectedAd extends AppCompatActivity {
 
     TextView tv_title, tv_location, tv_contact, tv_price, tv_description;
-    String title, location, contact, price, description, mainImageURL;
-    ImageView mainImage;
+    String title, location, contact, price, description, mainImageURL, image2URL, image3URL;
+    ImageView mainImage, image2, image3;
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    FirebaseAuth firebaseAuth;
+    String userID;
+    String childRef = "Advertisement";
+    String adID;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -23,12 +31,20 @@ public class ViewSelectedAd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_selected_ad);
 
-        title = getIntent().getExtras().getString("Title");
-        location = getIntent().getExtras().getString("Location");
-        contact = getIntent().getExtras().getString("Contact");
-        price = getIntent().getExtras().getString("Price");
-        description = getIntent().getExtras().getString("Description");
-        mainImageURL = getIntent().getExtras().getString("MainImage");
+        Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
+        adID = adDet.getKey();
+        userID = adDet.getUID();
+        StorageReference getImages = storageReference.child(childRef).child(userID).child(adID);
+
+        title = adDet.getTitle();
+        location = adDet.getLocation();
+        contact = adDet.getContact().toString();
+        price = adDet.getPrice().toString();
+        description = adDet.getDescription();
+        mainImageURL = getImages.child("MainImage").toString();
+        image2URL = getImages.child("Image2").toString();
+        image3URL = getImages.child("Image3").toString();
+
 
         tv_title = findViewById(R.id.tv_selected_ad_title2);
         tv_location = findViewById(R.id.tv_selected_ad_location);
@@ -39,7 +55,7 @@ public class ViewSelectedAd extends AppCompatActivity {
 
         tv_title.setText(title);
         tv_location.setText(location);
-        tv_contact.setText("0"+contact);
+        tv_contact.setText(contact);
         tv_price.setText(price);
         tv_description.setText(description);
 

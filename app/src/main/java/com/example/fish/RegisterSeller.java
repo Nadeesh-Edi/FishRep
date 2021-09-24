@@ -74,8 +74,8 @@ public class RegisterSeller extends AppCompatActivity {
                         String nic = regNic.getText().toString().trim();
                         String numb = regPhone.getText().toString().trim();
 
-                        registerUser(name, nic, numb, email, pwd);
                         regAuthUser(email, pwd);
+                        registerUser(name, nic, numb, email, pwd);
                     }
                     else
                         Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();

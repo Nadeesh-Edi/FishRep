@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,9 @@ import com.bumptech.glide.Glide;
 import com.example.fish.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,10 +36,10 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
 
     Context context;
     ArrayList<Advertisement> list;
-    ArrayList<String> IDs;
     AlertDialog.Builder builder;
     String childRef = "Advertisement";
     String userID;
+    FirebaseAuth firebaseAuth;
     private static final String TAG = "MyAdAdapter";
 
     public MyAdAdapter(Context context, ArrayList<Advertisement> list) {
@@ -61,9 +64,20 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
 //            holder.date.setText(ad.getDate());
 
         String adKey = ad.getKey();
-        ad.setKey(adKey);
+        firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                .child(childRef).child(userID).child(adKey);
 
-        Glide.with(context).load(list.get(position).getImageUrlMain()).into(holder.imageView);
+        // Set Image
+        storageReference.child("MainImage").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                if (!uri.equals(Uri.EMPTY)) {
+                    Glide.with(context).load(uri.toString()).into(holder.imageView);
+                }
+            }
+        });
 
         // On click delete button
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +90,6 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                userID = "user2";
 
                                 // Remove data from database
                                 DatabaseReference databaseReference =
@@ -89,9 +102,14 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         // Delete images from firebase storage
-                                        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
-                                                .child(childRef).child(userID).child(adKey).child("MainImage");
-                                        storageReference.delete();
+                                        StorageReference deleteRef = storageReference.child("MainImage");
+                                        deleteRef.delete();
+
+                                        deleteRef = storageReference.child("Image2");
+                                        deleteRef.delete();
+
+                                        deleteRef = storageReference.child("Image3");
+                                        deleteRef.delete();
 
                                         Toast.makeText(context, "Delete Successful!", Toast.LENGTH_SHORT).show();
                                     }
@@ -117,7 +135,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
         holder.changeDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateNewAd.class);
+                Intent intent = new Intent(view.getContext(), EditAd.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("AD", ad);
 

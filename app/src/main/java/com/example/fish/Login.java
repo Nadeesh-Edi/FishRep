@@ -1,6 +1,7 @@
 package com.example.fish;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +49,9 @@ public class Login extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(log_email, log_pwd).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this, Delivery.class));
+                    Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                    openMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivityIfNeeded(openMainActivity, 0);
                     finish();
                 }
                 else {

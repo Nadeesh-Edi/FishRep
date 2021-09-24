@@ -23,6 +23,7 @@
         <activity android:name="AdListing.MyAds" />
         <activity android:name="AdListing.ViewSelectedAd" />
         <activity android:name="AdListing.CreateNewAd"/>
+        <activity android:name="AdListing.EditAd"/>
         <activity android:name=".MainActivity"
 
             android:exported="true">

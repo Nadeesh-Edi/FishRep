@@ -17,7 +17,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Advertisement> list;
 
     AdAdapter adAdapter;
-    Button nav_login, nav_register;
+    Button nav_login, nav_logout;
     AlertDialog.Builder builder;
     ProgressBar progressBar;
 
+    FirebaseAuth firebaseAuth;
+    TextView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
 
         nav_login = findViewById(R.id.nav_login);
-        nav_register = findViewById(R.id.nav_register);
+        nav_logout = findViewById(R.id.nav_logout);
         progressBar = findViewById(R.id.progress_bar);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         // Check network connectivity
         boolean connected = false;
@@ -69,15 +75,26 @@ public class MainActivity extends AppCompatActivity {
             //connected to a network
             connected = true;
         }
-
         if(!connected) {
             builder = new AlertDialog.Builder(this);
             builder.setMessage("Not Connected to Network");
-            builder.setCancelable(false);
+            builder.setCancelable(true);
             AlertDialog alert11 = builder.create();
             progressBar.setVisibility(View.INVISIBLE);
             alert11.show();
         }
+
+        // Check user login
+        if (firebaseAuth.getCurrentUser() != null) {
+            nav_logout.setVisibility(View.VISIBLE);
+            nav_login.setVisibility(View.GONE);
+        }
+        else {
+            nav_login.setVisibility(View.VISIBLE);
+            nav_logout.setVisibility(View.GONE);
+        }
+
+
 
         recyclerView = findViewById(R.id.ad_listning_recyclerview);
         dbRef = FirebaseDatabase.getInstance().getReference("Advertisement");
@@ -96,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         Advertisement ad = ds.getValue(Advertisement.class);
                         assert ad != null;
                         ad.setKey(ds.getKey());
+                        ad.setUID(dataSnapshot.getKey());
                         list.add(ad);
                     }
                     adAdapter.notifyDataSetChanged();
@@ -115,6 +133,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     // ------------------------- START NAVIGATION DRAWER ---------------------------------------
+    public void navClickLogin(View view) {
+        Intent openMainActivity = new Intent(getApplicationContext(), Login.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    public void navClickLogout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        nav_logout.setVisibility(View.GONE);
+        nav_login.setVisibility(View.VISIBLE);
+        Toast.makeText(MainActivity.this, "Logging out...", Toast.LENGTH_SHORT).show();
+
+        Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+        openMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
     public void navClickHome(View view) {
         Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
         openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
