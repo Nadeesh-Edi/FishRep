@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -17,9 +16,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,10 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import AdListing.AdAdapter;
-import AdListing.Advertisement;
-import AdListing.CreateNewAd;
-import AdListing.MyAds;
+import com.example.fish.AdListing.AdAdapter;
+import com.example.fish.AdListing.Advertisement;
+import com.example.fish.AdListing.CreateNewAd;
+import com.example.fish.AdListing.MyAds;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     FirebaseAuth firebaseAuth;
-    TextView profile;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,15 +95,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         recyclerView = findViewById(R.id.ad_listning_recyclerview);
+        recyclerView.setHasFixedSize(true);
         dbRef = FirebaseDatabase.getInstance().getReference("Advertisement");
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(gridLayoutManager);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(gridLayoutManager);
 
         list = new ArrayList<>();
-        adAdapter = new AdAdapter(this, list);
-        recyclerView.setAdapter(adAdapter);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -118,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
                         ad.setUID(dataSnapshot.getKey());
                         list.add(ad);
                     }
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2, GridLayoutManager.VERTICAL, false);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    adAdapter = new AdAdapter(MainActivity.this, list);
+                    recyclerView.setAdapter(adAdapter);
                     adAdapter.notifyDataSetChanged();
                 }
                 progressBar.setVisibility(View.INVISIBLE);
@@ -127,8 +128,22 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
 
+        // Search bar
+        searchView = findViewById(R.id.search_box);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adAdapter.getFilter().filter(s);
+                return false;
+            }
         });
 
     }

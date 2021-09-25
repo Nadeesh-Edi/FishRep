@@ -1,12 +1,10 @@
-package AdListing;
+package com.example.fish.AdListing;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +31,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdViewHolder> {
+public class MyAdAdapter extends RecyclerView.Adapter<MyAdAdapter.AdViewHolder> {
 
     Context context;
     ArrayList<Advertisement> list;
@@ -50,13 +48,13 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
 
     @NonNull
     @Override
-    public AdListing.MyAdAdapter.AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyAdAdapter.AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.my_advertisement, parent, false);
-        return  new AdListing.MyAdAdapter.AdViewHolder(v);
+        return  new MyAdAdapter.AdViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdListing.MyAdAdapter.AdViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyAdAdapter.AdViewHolder holder, int position) {
 
         holder.progressBar.setVisibility(View.VISIBLE);
         Advertisement ad = list.get(position);

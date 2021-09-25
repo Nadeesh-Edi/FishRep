@@ -1,4 +1,4 @@
-package AdListing;
+package com.example.fish.AdListing;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,13 +28,15 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
     Context context;
     ArrayList<Advertisement> list;
+    ArrayList<Advertisement> listFull;
     String childRef = "Advertisement";
     String userID;
     FirebaseAuth firebaseAuth;
 
     public AdAdapter(Context context, ArrayList<Advertisement> list) {
         this.context = context;
-        this.list = list;
+        this.listFull = list;
+        this.list = new ArrayList<>(listFull);
     }
 
     @NonNull
@@ -48,6 +51,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     public void onBindViewHolder(@NonNull AdViewHolder holder, int position) {
 
         holder.progressBar.setVisibility(View.VISIBLE);
+        holder.imageView.setVisibility(View.INVISIBLE);
         Advertisement ad = list.get(position);
         holder.title.setText(ad.getTitle());
         holder.location.setText(ad.getLocation());
@@ -66,11 +70,11 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
             public void onSuccess(Uri uri) {
                 if (!uri.equals(Uri.EMPTY)) {
                     Glide.with(context).load(uri.toString()).into(holder.imageView);
+                    holder.imageView.setVisibility(View.VISIBLE);
                     holder.progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });
-
 
         // Send data to the selected ad view when select on the ad
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +85,6 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
                 intent.putExtra("AD", ad);
 
                 view.getContext().startActivity(intent);
-
             }
         });
 
@@ -91,6 +94,41 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     public int getItemCount() {
         return list.size();
     }
+
+    public Filter getFilter() {
+        return adFilter;
+    }
+
+    private final Filter adFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Advertisement> filteredAdList = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredAdList.addAll(listFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                for (Advertisement advertisement : listFull) {
+                    if (advertisement.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredAdList.add(advertisement);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredAdList;
+            filterResults.count = filteredAdList.size();
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            list.clear();
+            list.addAll((ArrayList) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class AdViewHolder extends RecyclerView.ViewHolder {
 
