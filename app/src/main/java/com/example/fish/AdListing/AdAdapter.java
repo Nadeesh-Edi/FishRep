@@ -95,6 +95,8 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         return list.size();
     }
 
+
+    // Search
     public Filter getFilter() {
         return adFilter;
     }
@@ -130,6 +132,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         }
     };
 
+    // View holder
     public static class AdViewHolder extends RecyclerView.ViewHolder {
 
         TextView title, location, price, date;

@@ -118,9 +118,6 @@ public class MyAds extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     // ------------------------- START NAVIGATION DRAWER ---------------------------------------

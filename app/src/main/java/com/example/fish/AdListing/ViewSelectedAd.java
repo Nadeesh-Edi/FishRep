@@ -21,13 +21,12 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ViewSelectedAd extends AppCompatActivity {
 
     TextView tv_title, tv_location, tv_contact, tv_price, tv_description, tv_date;
-    String title, location, contact, price, description, mainImageURL, image2URL, image3URL, date;
-    ImageView mainImage, image2, image3;
+    String title, location, contact, price, description, date;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-    FirebaseAuth firebaseAuth;
     String userID, childRef = "Advertisement", adID;
     ProgressBar progressBar;
     ImageSlider imageSlider;
@@ -68,26 +67,25 @@ public class ViewSelectedAd extends AppCompatActivity {
         tv_description.setText(description);
         tv_date.setText(date);
 
+        // Set images to ImageSlider
         imageList=new ArrayList<>();
-
-        // Set Images
         getImages.child("MainImage").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 if (!uri.equals(Uri.EMPTY)) {
-//                    imageList.add(new SlideModel(uri.toString()));
-//                    imageSlider.setImageList(imageList, ImageView.ScaleType.CENTER);
+                    imageList.add(new SlideModel(uri.toString()));
+                    imageSlider.setImageList(imageList, true);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
             }
+
         });
         getImages.child("Image2").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 if (!uri.equals(Uri.EMPTY)) {
-                    image2URL = uri.toString();
-
-                    progressBar.setVisibility(View.INVISIBLE);
+                    imageList.add(new SlideModel(uri.toString()));
+                    imageSlider.setImageList(imageList, true);
                 }
             }
         });
@@ -95,8 +93,8 @@ public class ViewSelectedAd extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 if (!uri.equals(Uri.EMPTY)) {
-                    image3URL = uri.toString();
-                    progressBar.setVisibility(View.INVISIBLE);
+                    imageList.add(new SlideModel(uri.toString()));
+                    imageSlider.setImageList(imageList, true);
                 }
             }
         });

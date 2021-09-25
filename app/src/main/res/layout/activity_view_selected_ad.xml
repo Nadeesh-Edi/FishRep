@@ -64,12 +64,35 @@
                 android:id="@+id/img_selected_ad_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                app:iss_auto_cycle="true"
-                app:iss_delay="0"
-                app:iss_error_image="@drawable/error"
-                app:iss_period="1000"
-                app:iss_selected_dot="@drawable/default_selected_dot"
-                app:iss_unselected_dot="@drawable/default_unselected_dot" />
+                app:auto_cycle="true"
+                app:delay="5000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:period="5000"
+                app:placeholder="@color/white" />
+
+
+<!--            <RelativeLayout-->
+<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                xmlns:tools="http://schemas.android.com/tools"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                tools:context=".MainActivity">-->
+<!--                <com.denzcoskun.imageslider.ImageSlider-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    app:auto_cycle="true"-->
+<!--                    app:delay="0"-->
+<!--                    android:id="@+id/slider"-->
+<!--                    app:period="1000"-->
+<!--                    app:corner_radius="20"-->
+<!--                    android:layout_height="200dp"/>-->
+
+<!--            </RelativeLayout>-->
 
             <!--        <androidx.viewpager.widget.ViewPager-->
             <!--            android:id="@+id/img_selected_ad_image"-->
