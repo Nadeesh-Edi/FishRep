@@ -1,6 +1,7 @@
 package com.example.fish;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -58,11 +59,13 @@ public class Login extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
 
+
                     SharedPreferences.Editor editor= sharedPreferences.edit();
                     editor.putString(EMAIL_KEY, log_email);
                     editor.apply();
 
                     startActivity(new Intent(Login.this, UserAccount.class));
+
                     finish();
                 }
                 else {

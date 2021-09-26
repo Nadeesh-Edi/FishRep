@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".AdListing.ViewSelectedAd">
+
+        <ImageView
+            android:id="@+id/menu_bar_back_btn"
+            android:layout_width="35dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="goBack"
+            android:src="@drawable/ic_baseline_arrow_back_24_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_create_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/tv_ad_box_title"
+            android:textColor="@color/main_color"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/menu_bar_back_btn"
+            app:layout_constraintStart_toEndOf="@+id/menu_bar_back_btn"
+            app:layout_constraintTop_toTopOf="@+id/menu_bar_back_btn" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:minHeight="100dp"
+            android:padding="0dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/img_selected_ad_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:auto_cycle="true"
+                app:delay="3000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:period="3000"
+                app:placeholder="@color/white" />
+
+            <ProgressBar
+                android:id="@+id/progressBar3"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateDrawable="@drawable/progressbar"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_selected_ad_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tv_ad_box_title"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageCard" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_ad_box_location"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_title2" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_contact_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/contact"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_description" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="@string/tv_selected_ad_contact"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_selected_ad_contact_string"
+            app:layout_constraintStart_toEndOf="@+id/tv_selected_ad_contact_string" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_rs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/rs"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_location" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_selected_ad_rs"
+            app:layout_constraintStart_toEndOf="@+id/tv_selected_ad_rs" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_description_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/description"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_rs" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:maxHeight="108dp"
+            android:text="@string/tv_selected_ad_description"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_description_string" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_selected_ad_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/blue_border_button"
+            android:drawableLeft="@drawable/ic_baseline_call_24"
+            android:drawableStart="@drawable/ic_baseline_call_24"
+            android:drawablePadding="20sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:text="@string/call"
+            android:textAllCaps="false"
+            android:textColor="@color/main_color"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/blue_border_button"
+            android:drawableLeft="@drawable/ic_baseline_add_shopping_cart_24"
+            android:drawableStart="@drawable/ic_baseline_add_shopping_cart_24"
+            android:drawablePadding="20sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:text="@string/select"
+            android:textAllCaps="false"
+            android:textColor="@color/main_color"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_selected_ad_call"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_selected_ad_call"
+            app:layout_constraintTop_toTopOf="@+id/btn_selected_ad_call"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/published_date_string"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btn_selected_ad_call"
+            app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2" />
+
+        <TextView
+            android:id="@+id/tv_selected_ad_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="2021/08/05"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+            app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

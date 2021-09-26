@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fish">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fish">
+
         <activity android:name=".UpdateSeller"></activity>
         <activity android:name=".DelSearch" />
         <activity android:name=".DeliveryConfirm" />
         <activity android:name=".UserAccount" />
         <activity android:name=".Delivery" />
         <activity android:name=".Login"
+        <activity android:name=".RegisterSeller"/>
+
+<!-- Sachintha -->
+        <activity android:name=".AdListing.UpdateAd" />
+        <activity android:name=".AdListing.MyAds" />
+        <activity android:name=".AdListing.ViewSelectedAd" />
+        <activity android:name=".AdListing.CreateNewAd"/>
+        <activity android:name=".AdListing.EditAd"/>
+        <activity android:name=".MainActivity"
+
+
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -22,7 +38,15 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".RegisterSeller"/>
+        <activity android:name=".MainActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

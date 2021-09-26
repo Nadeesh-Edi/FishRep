@@ -1,5 +1,6 @@
+<!--- Nadeesh -->
 <resources>
-    <string name="app_name">Fish</string>
+    <string name="app_name">Kaley Fish</string>
     <string name="RegTxt">REGISTER NEW SELLER</string>
     <string name="Nametxt">Enter name</string>
     <string name="Idtxt">Enter NIC number</string>
@@ -15,7 +16,7 @@
     <string name="action_settings">Settings</string>
     <string name="OrderIDtxt">Enter Order ID</string>
     <string name="DelAddtxt">Enter Delivery Address</string>
-    <string name="MapBtnTxt">Choose location on map</string>
+    <string name="MapBtnTxt" translatable="false">Choose location on map</string>
     <string name="DelDatetxt">Enter expected delivery date</string>
     <string name="DelBtntxt">Submit</string>
     <string name="DeleteAcctxt">Delete Account</string>
@@ -33,7 +34,81 @@
     <string name="et_text1">Name</string>
     <string name="DelDelete">Delete Delivery Order</string>
     <string name="SignUpBtn">Register as New User</string>
+
     <string name="DelSearchOrdID">Enter Order ID :</string>
     <string name="SearchOrdBtn">Search for Order</string>
     <string name="UpdateSellerHead">Update Seller</string>
+
+
+  
+<!--- Sachintha -->
+    <string name="select_location">Select Your Location</string>
+    <string name="search">Search</string>
+    <string name="location">Location : </string>
+    <string name="rs">Rs. </string>
+    <string name="tv_ad_box_title">Advertisement Title</string>
+    <string name="tv_ad_box_location">Location Name</string>
+    <string name="price">Price</string>
+    <string name="contact">Contact : </string>
+    <string name="tv_selected_ad_contact">0XXXXXXXXX</string>
+    <string name="description">Description : </string>
+    <string name="tv_selected_ad_description">Advertisement Description</string>
+    <string name="call">Call</string>
+    <string name="select">Select</string>
+    <string name="btn_change_details">Change Details</string>
+    <string name="btn_create_new_ad">Create New</string>
+    <string name="my_advertisement">My Listings</string>
+    <string name="new_ad">New Advertisement</string>
+    <string name="title">Title : </string>
+    <string name="price_rs">Price (Rs.) : </string>
+    <string name="images">Images :</string>
+    <string name="et_new_ad_title">Enter Title Here</string>
+    <string name="et_new_ad_location">Enter Location Here</string>
+    <string name="et_new_ad_price">Enter Price Here</string>
+    <string name="et_new_ad_contact">Enter Contact Number</string>
+    <string name="et_new_ad_description">Enter Description</string>
+    <string name="negotiable">Negotiable</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="update_ad">Update Details</string>
+    <string name="post_ad">Post Ad</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="orders">Orders</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="tv_ad_box_date">yyyy-mm-dd</string>
+    <string name="main_img">Main Image</string>
+    <string name="published_date_string">Posted on :</string>
+
+    <string-array name="districts">
+        <item>Select your district</item>
+        <item>Ampara</item>
+        <item>Anuradhapura</item>
+        <item>Badulle</item>
+        <item>Batticalloa</item>
+        <item>Colombo</item>
+        <item>Galle</item>
+        <item>Gampaha</item>
+        <item>Hambantota</item>
+        <item>Jaffna</item>
+        <item>Kalutara</item>
+        <item>Kandy</item>
+        <item>Kegalle</item>
+        <item>Kilinochchi</item>
+        <item>Kurunegala</item>
+        <item>Mannar</item>
+        <item>Matale</item>
+        <item>Matara</item>
+        <item>Moneragala</item>
+        <item>Mullativu</item>
+        <item>Nuwara Eliya</item>
+        <item>Polonnaruwa</item>
+        <item>Puttalam</item>
+        <item>Ratnapura</item>
+        <item>Trincomalee</item>
+        <item>Vavuniya</item>
+    </string-array>
+
 </resources>
+
