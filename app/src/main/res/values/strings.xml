@@ -1,6 +1,6 @@
 <!--- Nadeesh -->
 <resources>
-    <string name="app_name">Kaley Maalu</string>
+    <string name="app_name">Kaley Fish</string>
     <string name="RegTxt">REGISTER NEW SELLER</string>
     <string name="Nametxt">Enter name</string>
     <string name="Idtxt">Enter NIC number</string>
@@ -52,7 +52,7 @@
     <string name="select">Select</string>
     <string name="btn_change_details">Change Details</string>
     <string name="btn_create_new_ad">Create New</string>
-    <string name="my_advertisement">My Advertisements</string>
+    <string name="my_advertisement">My Listings</string>
     <string name="new_ad">New Advertisement</string>
     <string name="title">Title : </string>
     <string name="price_rs">Price (Rs.) : </string>

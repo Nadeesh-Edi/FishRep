@@ -128,7 +128,6 @@ public class EditAd extends AppCompatActivity {
                     if (!uri.equals(Uri.EMPTY)) {
                         Glide.with(EditAd.this).load(uri.toString()).into(addImage1);
                         imgURI1 = uri;
-                        Log.d(TAG, imgURI1.toString());
                     }
                 }
             });
@@ -138,7 +137,6 @@ public class EditAd extends AppCompatActivity {
                     if (!uri.equals(Uri.EMPTY)) {
                         Glide.with(EditAd.this).load(uri.toString()).into(addImage2);
                         imgURI2 = uri;
-                        Log.d(TAG, imgURI2.toString());
                     }
                 }
             });
@@ -148,7 +146,6 @@ public class EditAd extends AppCompatActivity {
                     if (!uri.equals(Uri.EMPTY)) {
                         Glide.with(EditAd.this).load(uri.toString()).into(addImage3);
                         imgURI3 = uri;
-                        Log.d(TAG, imgURI3.toString());
                     }
                 }
             });

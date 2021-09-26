@@ -252,6 +252,7 @@ public class CreateNewAd extends AppCompatActivity {
     }
 
     public void goBack(View view) {
+
         finish();
     }
 

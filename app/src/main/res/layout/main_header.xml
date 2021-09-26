@@ -18,17 +18,22 @@
         android:src="@drawable/ic_baseline_menu_24"
         tools:ignore="UsingOnClickInXml" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/black01"
-        android:layout_weight="1"
-        android:alpha="0.8"
-        android:textSize="25sp"
-        android:gravity="center_horizontal" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:src="@drawable/name"/>
+
+<!--    <TextView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/black01"-->
+<!--        android:layout_weight="1"-->
+<!--        android:alpha="0.8"-->
+<!--        android:textSize="25sp"-->
+<!--        android:gravity="center_horizontal" />-->
 
 
 </LinearLayout>

@@ -52,59 +52,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--        <ImageView-->
-            <!--            android:id="@+id/img_selected_ad_image"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="300dp"-->
-            <!--            android:scaleType="centerCrop"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/img_selected_ad_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:auto_cycle="true"
-                app:delay="5000"
+                app:delay="3000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:period="5000"
+                app:period="3000"
                 app:placeholder="@color/white" />
-
-
-<!--            <RelativeLayout-->
-<!--                xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--                xmlns:tools="http://schemas.android.com/tools"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                tools:context=".MainActivity">-->
-<!--                <com.denzcoskun.imageslider.ImageSlider-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    app:auto_cycle="true"-->
-<!--                    app:delay="0"-->
-<!--                    android:id="@+id/slider"-->
-<!--                    app:period="1000"-->
-<!--                    app:corner_radius="20"-->
-<!--                    android:layout_height="200dp"/>-->
-
-<!--            </RelativeLayout>-->
-
-            <!--        <androidx.viewpager.widget.ViewPager-->
-            <!--            android:id="@+id/img_selected_ad_image"-->
-            <!--            android:layout_width="fill_parent"-->
-            <!--            android:layout_height="fill_parent" />-->
 
             <ProgressBar
                 android:id="@+id/progressBar3"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:indeterminateDrawable="@drawable/progressbar"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -117,7 +86,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/tv_ad_box_title"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageCard" />
@@ -127,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_ad_box_location"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
             app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_title2" />
 
@@ -138,7 +107,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="4dp"
             android:text="@string/contact"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView6"
             app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
@@ -151,7 +120,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:text="@string/tv_selected_ad_contact"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_selected_ad_contact_string"
             app:layout_constraintStart_toEndOf="@+id/tv_selected_ad_contact_string" />
 
@@ -182,22 +151,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/description"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2"
             app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_rs" />
 
         <TextView
             android:id="@+id/tv_selected_ad_description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:maxHeight="108dp"
             android:text="@string/tv_selected_ad_description"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_description_string"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_selected_ad_description_string" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -256,7 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="@string/published_date_string"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/btn_selected_ad_call"
             app:layout_constraintStart_toStartOf="@+id/tv_selected_ad_title2" />
@@ -268,7 +239,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:text="2021/08/05"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
             app:layout_constraintStart_toEndOf="@+id/textView6" />
 

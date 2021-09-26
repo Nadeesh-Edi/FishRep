@@ -1,22 +1,28 @@
 package com.example.fish.AdListing;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.fish.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,7 @@ public class ViewSelectedAd extends AppCompatActivity {
     ProgressBar progressBar;
     ImageSlider imageSlider;
     List<SlideModel> imageList;
+    Button ad_call;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -59,6 +66,7 @@ public class ViewSelectedAd extends AppCompatActivity {
         tv_description = findViewById(R.id.tv_selected_ad_description);
         imageSlider = findViewById(R.id.img_selected_ad_image);
         tv_date = findViewById(R.id.tv_selected_ad_date);
+        ad_call = findViewById(R.id.btn_selected_ad_call);
 
         tv_title.setText(title);
         tv_location.setText(location);
@@ -80,6 +88,7 @@ public class ViewSelectedAd extends AppCompatActivity {
             }
 
         });
+
         getImages.child("Image2").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -89,6 +98,7 @@ public class ViewSelectedAd extends AppCompatActivity {
                 }
             }
         });
+
         getImages.child("Image3").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -96,6 +106,15 @@ public class ViewSelectedAd extends AppCompatActivity {
                     imageList.add(new SlideModel(uri.toString()));
                     imageSlider.setImageList(imageList, true);
                 }
+            }
+        });
+
+        // Call button
+        ad_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: +94" +  contact));
+                startActivity(intent);
             }
         });
 
