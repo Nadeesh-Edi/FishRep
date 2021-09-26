@@ -10,7 +10,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,7 +37,7 @@ public class RegisterSeller extends AppCompatActivity {
         regEmail = findViewById(R.id.RegEmail);
         regPwd = findViewById(R.id.RegPwd);
         reRegPwd = findViewById(R.id.ReRegPwd);
-        regBtn = findViewById(R.id.RegButn);
+        regBtn = findViewById(R.id.updButn);
 
         seller = new Seller();
 

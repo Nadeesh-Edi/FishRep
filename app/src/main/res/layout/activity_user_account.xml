@@ -15,7 +15,6 @@
         android:layout_width="364dp"
         android:layout_height="78dp"
         android:gravity="center"
-        android:text="USER PROFILE NAME"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,39 +25,40 @@
 
     <TextView
         android:id="@+id/ProNic"
-        android:layout_width="184dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="98dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="NIC - XXXXXXXXXV"
+        android:text="NIC  :"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProName" />
 
     <TextView
         android:id="@+id/proNic"
-        android:layout_width="233dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="153dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="76dp"
         android:gravity="center"
         android:text="@string/AccPhone"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProName" />
 
     <TextView
         android:id="@+id/proNic2"
-        android:layout_width="229dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="124dp"
+        android:layout_width="144dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="132dp"
         android:gravity="center"
         android:text="@string/AccEmail"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.232"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProName" />
 
@@ -67,6 +67,7 @@
         android:layout_width="178dp"
         android:layout_height="38dp"
         android:backgroundTint="#FF809B"
+        android:onClick="deletUser"
         android:text="@string/DeleteAcctxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/UpdateAccBtn"
@@ -82,6 +83,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:backgroundTint="#FF809B"
+        android:onClick="updateUser"
         android:text="@string/UpdateAcctxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,4 +118,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/unnamed" />
+
+    <TextView
+        android:id="@+id/profileNic"
+        android:layout_width="154dp"
+        android:layout_height="34dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ProNic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toEndOf="@+id/ProNic" />
+
+    <TextView
+        android:id="@+id/profileNum"
+        android:layout_width="154dp"
+        android:layout_height="32dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/proNic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.298"
+        app:layout_constraintStart_toEndOf="@+id/proNic" />
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="154dp"
+        android:layout_height="35dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/proNic2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/proNic2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

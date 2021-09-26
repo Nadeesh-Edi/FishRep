@@ -27,13 +27,12 @@
         android:id="@+id/MapBtn"
         android:layout_width="252dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="320dp"
+        android:layout_marginBottom="328dp"
         android:text="@string/MapBtnTxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.899"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DelQAddView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/DelBtn"
@@ -45,82 +44,69 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="110dp"
         android:backgroundTint="#FF809B"
+        android:onClick="addDelivery"
         android:text="@string/DelBtntxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DelDateView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/DelOrderID"
-        android:layout_width="377dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:hint="@string/OrderIDtxt"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="408dp"
+        android:layout_height="147dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="107dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DelTitle">
+        app:layout_constraintTop_toTopOf="@+id/DelTitle"
+        app:layout_constraintVertical_bias="0.052">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/DelORdID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Blanktxt" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:ems="10"
+            android:hint="@string/OrderIDtxt"
+            android:inputType="textPersonName" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/DelPhoneView"
-        android:layout_width="375dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/Phonetxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DelOrderID">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/DelPhone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/Phonetxt" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/Phonetxt"
+            android:inputType="textPersonName" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/DelQAddView"
-        android:layout_width="374dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/DelAddtxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DelPhoneView">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/DelAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/DelAddtxt" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:ems="10"
+            android:hint="@string/DelAddtxt"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/DelDateView"
-        android:layout_width="372dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+    <EditText
+        android:id="@+id/DelDate"
+        android:layout_width="408dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:ems="10"
         android:hint="@string/DelDatetxt"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MapBtn">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/DelDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/DelDatetxt" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/MapBtn"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,16 +21,19 @@
     <string name="DeleteAcctxt">Delete Account</string>
     <string name="UpdateAcctxt">Update Account</string>
     <string name="MakeAdtxt">ADVERTISE</string>
-    <string name="AccPhone">Phone number  : XXXXXXXXXX</string>
-    <string name="AccEmail">Email address   :   XXXXXXXXXX</string>
-    <string name="DelConfirmMsg" >Your delivery order has been successfully placed.</string>
-    <string name="DelConfirmID">Delivery ID   :   XXXXX</string>
-    <string name="DelConfirmOrdID">Order ID    :  XXXX</string>
-    <string name="DelConfirmDate">Expected Delivery date  :  XX/XX/XXX</string>
+    <string name="AccPhone">Phone number  :</string>
+    <string name="AccEmail">Email address   :</string>
+    <string name="DelConfirmMsg">Your delivery order has been successfully placed.</string>
+    <string name="DelConfirmID">Delivery Address   :</string>
+    <string name="DelConfirmOrdID">Order ID    :</string>
+    <string name="DelConfirmDate">Expected Delivery date  :</string>
     <string name="OKtxt">OK</string>
     <string name="Blanktxt" />
     <string name="RegMenu">Register</string>
     <string name="et_text1">Name</string>
     <string name="DelDelete">Delete Delivery Order</string>
     <string name="SignUpBtn">Register as New User</string>
+    <string name="DelSearchOrdID">Enter Order ID :</string>
+    <string name="SearchOrdBtn">Search for Order</string>
+    <string name="UpdateSellerHead">Update Seller</string>
 </resources>

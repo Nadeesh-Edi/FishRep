@@ -15,11 +15,11 @@
         android:layout_width="260dp"
         android:layout_height="42dp"
         android:layout_marginBottom="390dp"
-        android:text="@string/RegTxt"
+        android:text="@string/UpdateSellerHead"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.874"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:layout_constraintVertical_bias="1.0" />
@@ -65,20 +65,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IdView" />
 
-    <EditText
-        android:id="@+id/RegEmail"
-        android:layout_width="176dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="@string/Blanktxt"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/RegPwd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
-        app:layout_constraintStart_toEndOf="@+id/EmailView" />
-
     <TextView
         android:id="@+id/EmailView"
         android:layout_width="133dp"
@@ -93,67 +79,6 @@
         app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PhoneView" />
-
-    <EditText
-        android:id="@+id/ReRegPwd"
-        android:layout_width="176dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="@string/Blanktxt"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
-        app:layout_constraintStart_toEndOf="@+id/RepwdView"
-        app:layout_constraintTop_toBottomOf="@+id/RegName"
-        app:layout_constraintVertical_bias="0.731" />
-
-    <EditText
-        android:id="@+id/RegPwd"
-        android:layout_width="176dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="@string/Blanktxt"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/ReRegPwd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
-        app:layout_constraintStart_toEndOf="@+id/PwdView" />
-
-    <TextView
-        android:id="@+id/PwdView"
-        android:layout_width="133dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/Pwdtxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailView" />
-
-    <TextView
-        android:id="@+id/RepwdView"
-        android:layout_width="133dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/RePwdtxt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailView"
-        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/RegName"
@@ -189,12 +114,12 @@
         android:id="@+id/RegPhone"
         android:layout_width="176dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:inputType="phone"
         android:text="@string/Blanktxt"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/RegEmail"
+        app:layout_constraintBottom_toTopOf="@+id/updateEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toEndOf="@+id/PhoneView" />
@@ -203,15 +128,16 @@
         android:id="@+id/updButn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
         android:backgroundTint="#FF809B"
         android:onClick="addSeller"
-        android:text="@string/RegBtntxt"
+        android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RepwdView"
-        app:layout_constraintVertical_bias="0.774" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.933" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -229,5 +155,14 @@
         app:layout_constraintTop_toBottomOf="@+id/include"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/unnamed" />
+
+    <TextView
+        android:id="@+id/updateEmail"
+        android:layout_width="170dp"
+        android:layout_height="35dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/EmailView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintStart_toEndOf="@+id/EmailView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

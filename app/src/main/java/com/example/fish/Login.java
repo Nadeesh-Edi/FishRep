@@ -2,7 +2,9 @@ package com.example.fish;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -18,6 +20,11 @@ public class Login extends AppCompatActivity {
     Button login, signInBtn;
     FirebaseAuth mAuth;
 
+    SharedPreferences sharedPreferences;
+    public static final String SHARED_PREFS = "shared_prefs";
+    public static final String EMAIL_KEY = "email_key";
+    String emailShared;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +36,8 @@ public class Login extends AppCompatActivity {
         signInBtn = findViewById(R.id.Signup);
 
         mAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        emailShared = sharedPreferences.getString(EMAIL_KEY, null);
     }
 
     public void loginFunc(View view) {
@@ -48,7 +57,12 @@ public class Login extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(log_email, log_pwd).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this, Delivery.class));
+
+                    SharedPreferences.Editor editor= sharedPreferences.edit();
+                    editor.putString(EMAIL_KEY, log_email);
+                    editor.apply();
+
+                    startActivity(new Intent(Login.this, UserAccount.class));
                     finish();
                 }
                 else {
