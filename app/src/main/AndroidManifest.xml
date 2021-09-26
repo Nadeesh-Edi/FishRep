@@ -13,14 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fish">
-        <activity android:name=".DeliveryConfirm"/>
-        <activity android:name=".UserAccount"/>
-        <activity android:name=".Delivery"/>
-        <activity android:name=".Login"/>
+
+        <activity android:name=".UpdateSeller"></activity>
+        <activity android:name=".DelSearch" />
+        <activity android:name=".DeliveryConfirm" />
+        <activity android:name=".UserAccount" />
+        <activity android:name=".Delivery" />
+        <activity android:name=".Login"
         <activity android:name=".RegisterSeller"/>
 
 <!-- Sachintha -->
-
         <activity android:name=".AdListing.UpdateAd" />
         <activity android:name=".AdListing.MyAds" />
         <activity android:name=".AdListing.ViewSelectedAd" />
@@ -28,41 +30,14 @@
         <activity android:name=".AdListing.EditAd"/>
         <activity android:name=".MainActivity"
 
+
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-
-
-
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value="AdListing.UpdateAd" />-->
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value="AdListing.MyAds" />-->
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value="AdListing.ViewSelectedAd" />-->
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value="AdListing.ViewSelectedAd" />-->
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value="AdListing.CreateNewAd"/>-->
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value="AdListing.EditAd"/>-->
-
         <activity android:name=".MainActivity"
             android:exported="true"
             tools:ignore="DuplicateActivity">

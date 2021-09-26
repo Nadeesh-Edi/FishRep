@@ -18,6 +18,7 @@ public class Delivery extends AppCompatActivity {
     Button delBtn, mapBtn;
     DeliveryOrder del;
     DatabaseReference dbRef;
+    public static final String ORDER_ID = "com.example.fish.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,11 @@ public class Delivery extends AppCompatActivity {
                 dbRef.push().setValue(del);
 
                 Toast.makeText(getApplicationContext(), "Delivery order recorded successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Delivery.this, DeliveryConfirm.class));
+
+                Intent intent = new Intent(Delivery.this, DeliveryConfirm.class);
+                String ordID = orderID.getText().toString().trim();
+                intent.putExtra(ORDER_ID, ordID);
+                startActivity(intent);
             }
         }
         catch(Exception e) {
