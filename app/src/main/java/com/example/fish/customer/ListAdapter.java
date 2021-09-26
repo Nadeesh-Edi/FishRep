@@ -1,4 +1,4 @@
-package customer;
+package com.example.fish.customer;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
+import com.example.fish.R;
 
 public class ListAdapter extends ArrayAdapter {
 

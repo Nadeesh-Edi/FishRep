@@ -62,11 +62,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProName" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="#FF809B"
+        android:background="@drawable/rose_border_button"
         android:id="@+id/DeleteAccBtn"
         android:layout_width="178dp"
         android:layout_height="38dp"
-        android:backgroundTint="#FF809B"
         android:onClick="deletUser"
         android:text="@string/DeleteAcctxt"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,13 +77,14 @@
         app:layout_constraintTop_toBottomOf="@+id/proNic2"
         app:layout_constraintVertical_bias="0.182" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="#FF809B"
+        android:background="@drawable/rose_border_button"
         android:id="@+id/UpdateAccBtn"
         android:layout_width="172dp"
         android:layout_height="37dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:backgroundTint="#FF809B"
         android:onClick="updateUser"
         android:text="@string/UpdateAcctxt"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,12 +92,14 @@
         app:layout_constraintTop_toBottomOf="@+id/proNic2"
         app:layout_constraintVertical_bias="0.185" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/MakeAdBtn"
         android:layout_width="196dp"
         android:layout_height="69dp"
-        android:backgroundTint="#FF809B"
+        android:background="@drawable/rose_border_button"
+        android:onClick="advertise"
         android:text="@string/MakeAdtxt"
+        android:textColor="#FF809B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

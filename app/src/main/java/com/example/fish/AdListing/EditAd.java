@@ -88,6 +88,7 @@ public class EditAd extends AppCompatActivity {
         addImage3 = findViewById(R.id.img_btn_image3);
 
         // Check intent extras availability
+        // If available, the advertisement wants to be updated
         if (getIntent() != null && getIntent().getExtras() != null) {
             Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
             adID = adDet.getKey();

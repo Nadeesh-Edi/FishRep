@@ -1,4 +1,4 @@
-package customer;
+package com.example.fish.customer;
 
 public class Customer {
     private String name;

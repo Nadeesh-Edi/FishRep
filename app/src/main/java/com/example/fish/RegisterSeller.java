@@ -96,6 +96,8 @@ public class RegisterSeller extends AppCompatActivity {
         dbRef.push().setValue(seller);
 
         Toast.makeText(getApplicationContext(), "Seller Registered successfully", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(RegisterSeller.this, Login.class));
+        finish();
     }
 
     public void regAuthUser(String email, String pwd) {

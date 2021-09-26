@@ -8,29 +8,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/kalefish"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fish">
 
-        <activity android:name=".UpdateSeller"></activity>
-        <activity android:name=".DelSearch" />
+        <activity android:name=".UpdateSeller" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".DeliveryConfirm" />
         <activity android:name=".UserAccount" />
-        <activity android:name=".Delivery" />
-        <activity android:name=".Login"
+        <activity android:name=".DelSearch" />
+        <activity android:name=".Login"/>
         <activity android:name=".RegisterSeller"/>
 
 <!-- Sachintha -->
-        <activity android:name=".AdListing.UpdateAd" />
         <activity android:name=".AdListing.MyAds" />
         <activity android:name=".AdListing.ViewSelectedAd" />
         <activity android:name=".AdListing.CreateNewAd"/>
         <activity android:name=".AdListing.EditAd"/>
-        <activity android:name=".MainActivity"
 
-
+        <activity android:name=".Delivery"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -38,14 +36,28 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:exported="true"
-            tools:ignore="DuplicateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+
+<!-- Thirosh -->
+        <activity
+            android:name=".customer.CustomerFeedback"
+            android:exported="true" />
+        <activity
+            android:name=".customer.Payment"
+            android:exported="true" />
+        <activity
+            android:name=".customer.RetriveDataActivity"
+            android:exported="true" />
+        <activity
+            android:name=".customer.CustomerUpdate"
+            android:exported="true" />
+        <activity
+            android:name=".customer.CustomerBuy"
+            android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

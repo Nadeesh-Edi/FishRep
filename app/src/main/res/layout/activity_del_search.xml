@@ -50,7 +50,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="@color/main_color"
+        android:background="@drawable/blue_border_button"
         android:id="@+id/SearchDel"
         android:layout_width="165dp"
         android:layout_height="70dp"

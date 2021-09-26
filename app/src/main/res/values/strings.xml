@@ -34,7 +34,6 @@
     <string name="et_text1">Name</string>
     <string name="DelDelete">Delete Delivery Order</string>
     <string name="SignUpBtn">Register as New User</string>
-
     <string name="DelSearchOrdID">Enter Order ID :</string>
     <string name="SearchOrdBtn">Search for Order</string>
     <string name="UpdateSellerHead">Update Seller</string>
@@ -109,6 +108,34 @@
         <item>Trincomalee</item>
         <item>Vavuniya</item>
     </string-array>
+
+<!-- Thirosh -->
+    <string name="et_cus_name">Name :</string>
+    <string name="et_cus_address">Address :</string>
+    <string name="et_cus_province">Province :</string>
+    <string name="et_cus_phone">Contact :</string>
+    <string name="et_food">Fish Food Packets :</string>
+    <string name="et_fish_number">Quantity Of Pet Fish :</string>
+    <string name="btn_add_cart">Add Cart</string>
+    <string name="btn_update_cart">Update</string>
+    <string name="btn_delete_cart">Remove</string>
+    <string name="btn_buy_fish">Buy</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_buy_fishs">Buy</string>
+    <string name="btn_show">Show</string>
+    <string name="title_activity_retrive_fish_data">RetriveFishData</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="btn_cash">Cash</string>
+    <string name="btn_feedback">Send Feedback</string>
+    <string name="btn_feed">Send Feedback</string>
+    <string name="tvFeedback">Rate us</string>
 
 </resources>
 

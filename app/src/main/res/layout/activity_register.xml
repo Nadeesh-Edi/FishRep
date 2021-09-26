@@ -199,11 +199,12 @@
         app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toEndOf="@+id/PhoneView" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="#FF809B"
+        android:background="@drawable/rose_border_button"
         android:id="@+id/updButn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FF809B"
         android:onClick="addSeller"
         android:text="@string/RegBtntxt"
         app:layout_constraintBottom_toBottomOf="parent"

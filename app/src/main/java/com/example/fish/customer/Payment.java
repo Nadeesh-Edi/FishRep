@@ -1,4 +1,4 @@
-package customer;
+package com.example.fish.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.fish.R;
 
 public class Payment extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class Payment extends AppCompatActivity {
 
         try {
             Toast.makeText(getApplicationContext(), "Payment Cash Method is Successfully Save", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Payment.this, com.techdecode.fishproject.CustomerFeedback.class));
+            startActivity(new Intent(Payment.this, CustomerFeedback.class));
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Payment Cash Method Is Unsuccessful. Try Again..!", Toast.LENGTH_SHORT).show();

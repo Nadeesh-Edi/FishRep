@@ -1,4 +1,4 @@
-package customer;
+package com.example.fish.customer;
 
 import android.os.Bundle;
 import android.widget.ListView;
@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.fish.R;
 
 public class RetriveDataActivity extends AppCompatActivity {
     ListView myListview;

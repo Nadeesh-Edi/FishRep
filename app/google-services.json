@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "336242220074",
+    "firebase_url": "https://kaleyfish-b9f55-default-rtdb.firebaseio.com",
+    "project_id": "kaleyfish-b9f55",
+    "storage_bucket": "kaleyfish-b9f55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336242220074:android:d8bb2048380e88c8c0b753",
+        "android_client_info": {
+          "package_name": "com.example.fish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336242220074-75die0qqldrqmd7tbchrfhpvnm20fduh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaG--KrNCt3rcgA5aPIPUCjJIHfLRuSls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336242220074-75die0qqldrqmd7tbchrfhpvnm20fduh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

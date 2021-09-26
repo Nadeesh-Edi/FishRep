@@ -3,13 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CustomerBuy">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/include"
         layout="@layout/toolbar" />
-
 
     <TextView
         android:id="@+id/et_cus_name"
@@ -19,7 +17,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/et_cus_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/et_cus_address"
@@ -29,7 +28,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/et_cus_address"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cus_name" />
+        app:layout_constraintTop_toBottomOf="@+id/et_cus_name"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/et_cus_province"
@@ -39,7 +39,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/et_cus_province"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cus_address" />
+        app:layout_constraintTop_toBottomOf="@+id/et_cus_address"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/et_cus_phone"
@@ -49,7 +50,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/et_cus_phone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cus_province" />
+        app:layout_constraintTop_toBottomOf="@+id/et_cus_province"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/et_food"
@@ -59,7 +61,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/et_food"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cus_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/et_cus_phone"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/et_add_name"
@@ -72,7 +75,8 @@
         android:text=""
         app:layout_constraintBaseline_toBaselineOf="@+id/et_cus_name"
         app:layout_constraintStart_toEndOf="@+id/et_cus_name"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/et_fish_number"
@@ -82,7 +86,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/et_fish_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_food" />
+        app:layout_constraintTop_toBottomOf="@+id/et_food"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/et_add_address"
@@ -95,7 +100,8 @@
         android:text=""
         app:layout_constraintBaseline_toBaselineOf="@+id/et_cus_address"
         app:layout_constraintStart_toEndOf="@+id/et_cus_address"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/et_add_province"
@@ -108,7 +114,8 @@
         android:text=""
         app:layout_constraintBaseline_toBaselineOf="@+id/et_cus_province"
         app:layout_constraintStart_toEndOf="@+id/et_cus_province"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/et_add_contact"
@@ -120,7 +127,8 @@
         android:minHeight="48dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_cus_phone"
         app:layout_constraintStart_toEndOf="@+id/et_cus_phone"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/et_add_food"
@@ -133,7 +141,8 @@
         android:text=""
         app:layout_constraintBaseline_toBaselineOf="@+id/et_food"
         app:layout_constraintStart_toEndOf="@+id/et_food"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="16dp" />
 
     <EditText
         android:id="@+id/et_add_qty"
@@ -145,15 +154,17 @@
         android:minHeight="48dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_fish_number"
         app:layout_constraintStart_toEndOf="@+id/et_fish_number"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:layout_marginLeft="16dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_cart"
         android:layout_width="129dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        android:backgroundTint="#04ED0D"
+        android:background="@drawable/green_border_button"
         android:text="@string/btn_add_cart"
+        android:textColor="#04ED0D"
         app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintHorizontal_bias="0.683"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +181,8 @@
         android:textColor="#E91E63"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:layout_marginLeft="8dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -182,7 +194,10 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView9"
-        app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24" />
+        app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -192,7 +207,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView9"
-        app:srcCompat="@drawable/ic_baseline_settings" />
+        app:srcCompat="@drawable/ic_baseline_settings"
+        android:layout_marginRight="16dp"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -201,19 +218,22 @@
         android:layout_marginStart="112dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:srcCompat="@drawable/images" />
+        app:srcCompat="@drawable/images"
+        android:layout_marginLeft="112dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="139dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="64dp"
-        android:backgroundTint="#258AB8"
+        android:background="@drawable/blue_border_button"
         android:onClick="next"
         android:text="@string/btn_next"
+        android:textColor="#258AB8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_add_qty" />
+        app:layout_constraintTop_toBottomOf="@+id/et_add_qty"
+        android:layout_marginRight="64dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

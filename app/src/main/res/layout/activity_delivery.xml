@@ -23,7 +23,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.117" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="@color/main_color"
+        android:background="@drawable/blue_border_button"
         android:id="@+id/MapBtn"
         android:layout_width="252dp"
         android:layout_height="38dp"
@@ -34,7 +36,9 @@
         app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="#FF809B"
+        android:background="@drawable/rose_border_button"
         android:id="@+id/DelBtn"
         android:layout_width="135dp"
         android:layout_height="70dp"
@@ -43,7 +47,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="110dp"
-        android:backgroundTint="#FF809B"
         android:onClick="addDelivery"
         android:text="@string/DelBtntxt"
         app:layout_constraintBottom_toBottomOf="parent"

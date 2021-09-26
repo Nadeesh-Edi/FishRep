@@ -1,4 +1,4 @@
-package customer;
+package com.example.fish.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.example.fish.R;
 
 public class CustomerUpdate extends AppCompatActivity {
     EditText et_update_name, et_update_address, et_update_province, et_update_contact, et_update_food, et_update_qty;
     Button btn_update_cart;
     DatabaseReference dbRef;
-    com.techdecode.fishproject.Customer cus;
+    Customer cus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class CustomerUpdate extends AppCompatActivity {
         btn_update_cart = findViewById(R.id.btn_update_cart);
         dbRef = FirebaseDatabase.getInstance().getReference().child("Customer");
 
-        cus = new com.techdecode.fishproject.Customer();
+        cus = new Customer();
         btn_update_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +75,7 @@ public class CustomerUpdate extends AppCompatActivity {
         public void buyNow(View view) {
             try {
             Toast.makeText(getApplicationContext(), "Order Buy is Successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CustomerUpdate.this, com.techdecode.fishproject.Payment.class));
+            startActivity(new Intent(CustomerUpdate.this, Payment.class));
             }
          catch(Exception e) {
             Toast.makeText(getApplicationContext(), "Order Buying Is Unsuccessful. Try Again..!", Toast.LENGTH_SHORT).show();

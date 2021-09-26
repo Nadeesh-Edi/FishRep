@@ -1,4 +1,4 @@
-package customer;
+package com.example.fish.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +9,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.fish.AdListing.CreateNewAd;
+import com.example.fish.AdListing.MyAds;
+import com.example.fish.Login;
+import com.example.fish.MainActivity;
+import com.example.fish.UserAccount;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.example.fish.R;
 
 public class CustomerBuy extends AppCompatActivity {
     EditText et_add_name, et_add_address, et_add_province, et_add_contact, et_add_food, et_add_qty;
     Button btn_add_cart;
     DatabaseReference dbRef;
-    com.techdecode.fishproject.Customer cus;
+    Customer cus;
 
 
     @Override
@@ -35,7 +44,7 @@ public class CustomerBuy extends AppCompatActivity {
         btn_add_cart = findViewById(R.id.btn_add_cart);
         dbRef = FirebaseDatabase.getInstance().getReference().child("Customer");
 
-        cus = new com.techdecode.fishproject.Customer();
+        cus = new Customer();
         btn_add_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +139,8 @@ public class CustomerBuy extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Add To Cart Data Is Unsuccessful", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
 
 //        DAOCustomer dao = new DAOCustomer();

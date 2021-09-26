@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CustomerUpdate">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/include"
@@ -192,37 +191,42 @@
         app:layout_constraintStart_toEndOf="@+id/et_fish_number"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_update_cart"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginTop="56dp"
-        android:backgroundTint="#098C0F"
+        android:textColor="#098C0F"
+        android:background="@drawable/green2_border_button"
         android:text="@string/btn_update_cart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_fish_number" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_remove"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
-        android:backgroundTint="#D30E0E"
+        android:background="@drawable/red2_border_button"
+        android:textColor="#D30E0E"
+
         android:text="@string/btn_remove"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_fish_number" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/byn_buy_fishs"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="52dp"
-        android:backgroundTint="#FF9800"
+        android:background="@drawable/yellow_border_button"
         android:onClick="buyNow"
         android:text="@string/btn_buy_fishs"
+        android:textColor="#FF9800"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btn_update_cart"

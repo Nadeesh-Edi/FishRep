@@ -101,8 +101,9 @@ public class MainActivity extends AppCompatActivity {
         dbRef = FirebaseDatabase.getInstance().getReference("Advertisement");
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(gridLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2,
+                GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         list = new ArrayList<>();
 
@@ -117,8 +118,7 @@ public class MainActivity extends AppCompatActivity {
                         ad.setUID(dataSnapshot.getKey());
                         list.add(ad);
                     }
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2, GridLayoutManager.VERTICAL, false);
-                    recyclerView.setLayoutManager(gridLayoutManager);
+
                     adAdapter = new AdAdapter(MainActivity.this, list);
                     recyclerView.setAdapter(adAdapter);
                     adAdapter.notifyDataSetChanged();
@@ -181,19 +181,26 @@ public class MainActivity extends AppCompatActivity {
     public void navClickPostAd(View view) {
         Intent openMainActivity = new Intent(getApplicationContext(), CreateNewAd.class);
         openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivityIfNeeded(openMainActivity, 1);
+        startActivityIfNeeded(openMainActivity, 0);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickMyAd(View view) {
         Intent openMainActivity = new Intent(getApplicationContext(), MyAds.class);
         openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivityIfNeeded(openMainActivity, 2);
+        startActivityIfNeeded(openMainActivity, 0);
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickOrders(View view) {
 
+    }
+
+    public void navClickProfile(View view) {
+        Intent openMainActivity = new Intent(getApplicationContext(), UserAccount.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void ClickMenu(View view) {

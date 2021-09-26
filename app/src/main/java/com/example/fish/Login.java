@@ -59,12 +59,11 @@ public class Login extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
 
-
                     SharedPreferences.Editor editor= sharedPreferences.edit();
                     editor.putString(EMAIL_KEY, log_email);
                     editor.apply();
 
-                    startActivity(new Intent(Login.this, UserAccount.class));
+                    startActivity(new Intent(Login.this, MainActivity.class));
 
                     finish();
                 }

@@ -1,8 +1,9 @@
-package customer;
+package com.example.fish.customer;
 
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import com.example.fish.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
