@@ -2,9 +2,10 @@ package com.example.fish;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -13,11 +14,15 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +31,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import AdListing.AdAdapter;
-import AdListing.Advertisement;
-import AdListing.CreateNewAd;
-import AdListing.MyAds;
+import com.example.fish.AdListing.AdAdapter;
+import com.example.fish.AdListing.Advertisement;
+import com.example.fish.AdListing.CreateNewAd;
+import com.example.fish.AdListing.MyAds;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -41,10 +46,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Advertisement> list;
 
     AdAdapter adAdapter;
-    Button nav_login, nav_register;
+    Button nav_login, nav_logout;
     AlertDialog.Builder builder;
     ProgressBar progressBar;
 
+    FirebaseAuth firebaseAuth;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
 
         nav_login = findViewById(R.id.nav_login);
-        nav_register = findViewById(R.id.nav_register);
+        nav_logout = findViewById(R.id.nav_logout);
         progressBar = findViewById(R.id.progress_bar);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         // Check network connectivity
         boolean connected = false;
@@ -69,23 +77,34 @@ public class MainActivity extends AppCompatActivity {
             //connected to a network
             connected = true;
         }
-
         if(!connected) {
             builder = new AlertDialog.Builder(this);
             builder.setMessage("Not Connected to Network");
-            builder.setCancelable(false);
+            builder.setCancelable(true);
             AlertDialog alert11 = builder.create();
             progressBar.setVisibility(View.INVISIBLE);
             alert11.show();
         }
 
+        // Check user login
+        if (firebaseAuth.getCurrentUser() != null) {
+            nav_logout.setVisibility(View.VISIBLE);
+            nav_login.setVisibility(View.GONE);
+        }
+        else {
+            nav_login.setVisibility(View.VISIBLE);
+            nav_logout.setVisibility(View.GONE);
+        }
+
         recyclerView = findViewById(R.id.ad_listning_recyclerview);
+        recyclerView.setHasFixedSize(true);
         dbRef = FirebaseDatabase.getInstance().getReference("Advertisement");
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(gridLayoutManager);
 
         list = new ArrayList<>();
-        adAdapter = new AdAdapter(this, list);
-        recyclerView.setAdapter(adAdapter);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,10 +113,14 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for(DataSnapshot ds: dataSnapshot.getChildren()) {
                         Advertisement ad = ds.getValue(Advertisement.class);
-                        assert ad != null;
                         ad.setKey(ds.getKey());
+                        ad.setUID(dataSnapshot.getKey());
                         list.add(ad);
                     }
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2, GridLayoutManager.VERTICAL, false);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    adAdapter = new AdAdapter(MainActivity.this, list);
+                    recyclerView.setAdapter(adAdapter);
                     adAdapter.notifyDataSetChanged();
                 }
                 progressBar.setVisibility(View.INVISIBLE);
@@ -107,14 +130,47 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
 
+        // Search bar
+        searchView = findViewById(R.id.search_box);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adAdapter.getFilter().filter(s);
+                return false;
+            }
         });
 
     }
 
 
     // ------------------------- START NAVIGATION DRAWER ---------------------------------------
+    public void navClickLogin(View view) {
+        Intent openMainActivity = new Intent(getApplicationContext(), Login.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    public void navClickLogout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        nav_logout.setVisibility(View.GONE);
+        nav_login.setVisibility(View.VISIBLE);
+        Toast.makeText(MainActivity.this, "Logging out...", Toast.LENGTH_SHORT).show();
+
+        Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+        openMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
     public void navClickHome(View view) {
         Intent openMainActivity = new Intent(getApplicationContext(), MainActivity.class);
         openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

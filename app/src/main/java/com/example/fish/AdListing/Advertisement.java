@@ -1,4 +1,4 @@
-package AdListing;
+package com.example.fish.AdListing;
 
 import android.os.Build;
 
@@ -23,6 +23,15 @@ public class Advertisement implements Serializable {
 
     @Exclude
     private String key;
+    private String UID;
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String uID) {
+        this.UID = uID;
+    }
 
     public String getKey() {
         return key;

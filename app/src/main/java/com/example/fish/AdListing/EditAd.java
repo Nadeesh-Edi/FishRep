@@ -1,6 +1,5 @@
-package AdListing;
+package com.example.fish.AdListing;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,19 +24,17 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.fish.Login;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.example.fish.R;
 
-public class CreateNewAd extends AppCompatActivity {
-
-    ///////// BOTH CREATE NEW ADVERTISEMENT AND UPDATE AN EXISTING ADVERTISEMENT /////////
+public class EditAd extends AppCompatActivity {
 
     EditText et_new_ad_title, et_new_ad_price, et_new_ad_contact, et_new_ad_description;
     Spinner select_location_search;
@@ -46,27 +42,36 @@ public class CreateNewAd extends AppCompatActivity {
     ImageView addImage1, addImage2, addImage3;
     CheckBox chk_negotiable;
     Boolean negotiable_value = false;
-    private static final String TAG = "CreateAd/EditAd";
+    private static final String TAG = "EditAd";
 
     ProgressBar progressBar;
     Uri imgURI1 = Uri.EMPTY, imgURI2 = Uri.EMPTY, imgURI3 = Uri.EMPTY;
 
-    private DatabaseReference dbRef;
-    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();;
+    DatabaseReference dbRef;
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    FirebaseAuth firebaseAuth;
     Advertisement ad;
     String userID;
     String childRef = "Advertisement";
     String adID;
-    Boolean isNew = true;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_ad);
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        // Get the current user
-        userID = "user2";
+        // Check user login
+        if (firebaseAuth.getCurrentUser() != null) {
+            // Get the current user
+            userID = firebaseAuth.getCurrentUser().getUid();
+        }
+        else{
+            Toast.makeText(EditAd.this, "Please login first!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), Login.class));
+            finish();
+        }
 
         et_new_ad_title = findViewById(R.id.et_new_ad_title);
         et_new_ad_price = findViewById(R.id.et_new_ad_price);
@@ -82,12 +87,11 @@ public class CreateNewAd extends AppCompatActivity {
         addImage2 = findViewById(R.id.img_btn_image2);
         addImage3 = findViewById(R.id.img_btn_image3);
 
-        // When editing an advertisement these codes will run
+        // Check intent extras availability
         if (getIntent() != null && getIntent().getExtras() != null) {
             Advertisement adDet = (Advertisement) getIntent().getSerializableExtra("AD");
-            StorageReference getImages = storageReference.child(childRef).child(userID).child(adDet.getKey());
-            isNew = false;
             adID = adDet.getKey();
+            StorageReference getImages = storageReference.child(childRef).child(userID).child(adID);
 
             TextView tv_create_ad = findViewById(R.id.tv_create_ad);
             String updateDetails = "Update Details";
@@ -122,7 +126,7 @@ public class CreateNewAd extends AppCompatActivity {
                 @Override
                 public void onSuccess(Uri uri) {
                     if (!uri.equals(Uri.EMPTY)) {
-                        Glide.with(CreateNewAd.this).load(uri.toString()).into(addImage1);
+                        Glide.with(EditAd.this).load(uri.toString()).into(addImage1);
                         imgURI1 = uri;
                     }
                 }
@@ -131,7 +135,7 @@ public class CreateNewAd extends AppCompatActivity {
                 @Override
                 public void onSuccess(Uri uri) {
                     if (!uri.equals(Uri.EMPTY)) {
-                        Glide.with(CreateNewAd.this).load(uri.toString()).into(addImage2);
+                        Glide.with(EditAd.this).load(uri.toString()).into(addImage2);
                         imgURI2 = uri;
                     }
                 }
@@ -140,12 +144,11 @@ public class CreateNewAd extends AppCompatActivity {
                 @Override
                 public void onSuccess(Uri uri) {
                     if (!uri.equals(Uri.EMPTY)) {
-                        Glide.with(CreateNewAd.this).load(uri.toString()).into(addImage3);
+                        Glide.with(EditAd.this).load(uri.toString()).into(addImage3);
                         imgURI3 = uri;
                     }
                 }
             });
-
 
             // Set negotiable checkbox
             chk_negotiable.setChecked(negotiable);
@@ -227,7 +230,7 @@ public class CreateNewAd extends AppCompatActivity {
                 et_new_ad_title.setError("Title is required!");
             }
             else if(location.equals("Select your district")){
-                Toast.makeText(CreateNewAd.this, "Please select your district!",
+                Toast.makeText(EditAd.this, "Please select your district!",
                         Toast.LENGTH_SHORT).show();
             }
             else if(TextUtils.isEmpty(price)){
@@ -240,7 +243,7 @@ public class CreateNewAd extends AppCompatActivity {
                 et_new_ad_description.setError("Description is required!");
             }
             else if(imgURI1.equals(Uri.EMPTY)) {
-                Toast.makeText(CreateNewAd.this, "Main image required!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditAd.this, "Main image required!", Toast.LENGTH_SHORT).show();
             }
             else {
                 // Set data to advertisement
@@ -253,8 +256,7 @@ public class CreateNewAd extends AppCompatActivity {
                 ad.setDate();
 
                 // Upload image to firebase and save database if main image upload success
-                Log.d(TAG, imgURI1.toString());
-                uploadFirebase(imgURI1);
+                uploadFirebase();
 
             }
         } catch (Exception e) {
@@ -263,21 +265,19 @@ public class CreateNewAd extends AppCompatActivity {
     }
 
     // Upload images to firebase storage and get the url
-    private void uploadFirebase(Uri uri) {
-        if (isNew)
-            adID = dbRef.push().getKey();
+    private void uploadFirebase() {
         assert adID != null;
-        StorageReference fileRef = storageReference.child(childRef).child(userID).child(adID).child("MainImage");
-        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+        // Save data in the database
+        dbRef.child(userID).child(adID).setValue(ad)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(Uri uri) {
-
-                        // Add image url to the advertisement
-                        ad.setImageUrlMain(uri.toString());
-
+                    public void onSuccess(Void unused) {
+                        // Upload main image
+                        if (!imgURI1.equals(Uri.EMPTY)){
+                            StorageReference storageRef1 = storageReference.child(childRef).child(userID).child(adID).child("MainImage");
+                            storageRef1.putFile(imgURI1);
+                        }
                         // Upload 2nd image
                         if (!imgURI2.equals(Uri.EMPTY)){
                             StorageReference storageRef2 = storageReference.child(childRef).child(userID).child(adID).child("Image2");
@@ -289,40 +289,24 @@ public class CreateNewAd extends AppCompatActivity {
                             storageRef3.putFile(imgURI3);
                         }
 
-                        // Save data in the database
-                        dbRef.child(userID).child(adID).setValue(ad)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(CreateNewAd.this, "Data saved Successfully!",
-                                                Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), MyAds.class));
-                                        finish();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(CreateNewAd.this, "Data not saved!",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        Toast.makeText(EditAd.this, "Data updated successfully!",
+                                Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MyAds.class));
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(EditAd.this, "Data not updated!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(CreateNewAd.this,"Uploading Faild!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
+
     }
+
 
     public void goBack(View view) {
         finish();

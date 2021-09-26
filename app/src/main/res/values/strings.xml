@@ -44,7 +44,7 @@
     <string name="tv_ad_box_title">Advertisement Title</string>
     <string name="tv_ad_box_location">Location Name</string>
     <string name="price">Price</string>
-    <string name="contact">Contact (+94) : </string>
+    <string name="contact">Contact : </string>
     <string name="tv_selected_ad_contact">0XXXXXXXXX</string>
     <string name="description">Description : </string>
     <string name="tv_selected_ad_description">Advertisement Description</string>
@@ -52,7 +52,7 @@
     <string name="select">Select</string>
     <string name="btn_change_details">Change Details</string>
     <string name="btn_create_new_ad">Create New</string>
-    <string name="my_advertisement">My Advertisements</string>
+    <string name="my_advertisement">My Listings</string>
     <string name="new_ad">New Advertisement</string>
     <string name="title">Title : </string>
     <string name="price_rs">Price (Rs.) : </string>
@@ -71,37 +71,38 @@
     <string name="profile">Profile</string>
     <string name="orders">Orders</string>
     <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="logout">Logout</string>
     <string name="tv_ad_box_date">yyyy-mm-dd</string>
     <string name="main_img">Main Image</string>
+    <string name="published_date_string">Posted on :</string>
 
     <string-array name="districts">
-    <item>Select your district</item>
-    <item>Ampara</item>
-    <item>Anuradhapura</item>
-    <item>Badulle</item>
-    <item>Batticalloa</item>
-    <item>Colombo</item>
-    <item>Galle</item>
-    <item>Gampaha</item>
-    <item>Hambantota</item>
-    <item>Jaffna</item>
-    <item>Kalutara</item>
-    <item>Kandy</item>
-    <item>Kegalle</item>
-    <item>Kilinochchi</item>
-    <item>Kurunegala</item>
-    <item>Mannar</item>
-    <item>Matale</item>
-    <item>Matara</item>
-    <item>Moneragala</item>
-    <item>Mullativu</item>
-    <item>Nuwara Eliya</item>
-    <item>Polonnaruwa</item>
-    <item>Puttalam</item>
-    <item>Ratnapura</item>
-    <item>Trincomalee</item>
-    <item>Vavuniya</item>
+        <item>Select your district</item>
+        <item>Ampara</item>
+        <item>Anuradhapura</item>
+        <item>Badulle</item>
+        <item>Batticalloa</item>
+        <item>Colombo</item>
+        <item>Galle</item>
+        <item>Gampaha</item>
+        <item>Hambantota</item>
+        <item>Jaffna</item>
+        <item>Kalutara</item>
+        <item>Kandy</item>
+        <item>Kegalle</item>
+        <item>Kilinochchi</item>
+        <item>Kurunegala</item>
+        <item>Mannar</item>
+        <item>Matale</item>
+        <item>Matara</item>
+        <item>Moneragala</item>
+        <item>Mullativu</item>
+        <item>Nuwara Eliya</item>
+        <item>Polonnaruwa</item>
+        <item>Puttalam</item>
+        <item>Ratnapura</item>
+        <item>Trincomalee</item>
+        <item>Vavuniya</item>
     </string-array>
 
 </resources>

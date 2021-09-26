@@ -1,16 +1,16 @@
-package AdListing;
+package com.example.fish.AdListing;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.util.Log;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +21,9 @@ import com.bumptech.glide.Glide;
 import com.example.fish.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -29,14 +31,14 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdViewHolder> {
+public class MyAdAdapter extends RecyclerView.Adapter<MyAdAdapter.AdViewHolder> {
 
     Context context;
     ArrayList<Advertisement> list;
-    ArrayList<String> IDs;
     AlertDialog.Builder builder;
     String childRef = "Advertisement";
     String userID;
+    FirebaseAuth firebaseAuth;
     private static final String TAG = "MyAdAdapter";
 
     public MyAdAdapter(Context context, ArrayList<Advertisement> list) {
@@ -46,14 +48,15 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
 
     @NonNull
     @Override
-    public AdListing.MyAdAdapter.AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyAdAdapter.AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.my_advertisement, parent, false);
-        return  new AdListing.MyAdAdapter.AdViewHolder(v);
+        return  new MyAdAdapter.AdViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdListing.MyAdAdapter.AdViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyAdAdapter.AdViewHolder holder, int position) {
 
+        holder.progressBar.setVisibility(View.VISIBLE);
         Advertisement ad = list.get(position);
         holder.title.setText(ad.getTitle());
         holder.location.setText(ad.getLocation());
@@ -61,9 +64,21 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
 //            holder.date.setText(ad.getDate());
 
         String adKey = ad.getKey();
-        ad.setKey(adKey);
+        firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+                .child(childRef).child(userID).child(adKey);
 
-        Glide.with(context).load(list.get(position).getImageUrlMain()).into(holder.imageView);
+        // Set Image
+        storageReference.child("MainImage").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                if (!uri.equals(Uri.EMPTY)) {
+                    Glide.with(context).load(uri.toString()).into(holder.imageView);
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
 
         // On click delete button
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +91,6 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                userID = "user2";
 
                                 // Remove data from database
                                 DatabaseReference databaseReference =
@@ -89,9 +103,14 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         // Delete images from firebase storage
-                                        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
-                                                .child(childRef).child(userID).child(adKey).child("MainImage");
-                                        storageReference.delete();
+                                        StorageReference deleteRef = storageReference.child("MainImage");
+                                        deleteRef.delete();
+
+                                        deleteRef = storageReference.child("Image2");
+                                        deleteRef.delete();
+
+                                        deleteRef = storageReference.child("Image3");
+                                        deleteRef.delete();
 
                                         Toast.makeText(context, "Delete Successful!", Toast.LENGTH_SHORT).show();
                                     }
@@ -117,7 +136,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
         holder.changeDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateNewAd.class);
+                Intent intent = new Intent(view.getContext(), EditAd.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("AD", ad);
 
@@ -137,6 +156,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
         TextView title, location, price, date;
         ImageView imageView, deleteButton;
         Button changeDetails;
+        ProgressBar progressBar;
 
         public AdViewHolder(@NonNull View adView) {
             super(adView);
@@ -148,6 +168,7 @@ public class MyAdAdapter extends RecyclerView.Adapter<AdListing.MyAdAdapter.AdVi
             imageView = adView.findViewById(R.id.ad_box_img);
             changeDetails = adView.findViewById(R.id.btn_chanege_details);
             deleteButton = adView.findViewById(R.id.btn_delete_ad);
+            progressBar = adView.findViewById(R.id.progressBar2);
         }
     }
 }

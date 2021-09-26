@@ -1,4 +1,4 @@
-package AdListing;
+package com.example.fish.AdListing;
 
 import android.os.Bundle;
 import android.util.Log;
