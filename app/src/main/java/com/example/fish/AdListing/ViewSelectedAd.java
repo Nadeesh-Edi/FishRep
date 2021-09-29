@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.fish.R;
+import com.example.fish.customer.CustomerBuy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +38,7 @@ public class ViewSelectedAd extends AppCompatActivity {
     ProgressBar progressBar;
     ImageSlider imageSlider;
     List<SlideModel> imageList;
-    Button ad_call;
+    Button ad_call, select_ad;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -67,6 +68,7 @@ public class ViewSelectedAd extends AppCompatActivity {
         imageSlider = findViewById(R.id.img_selected_ad_image);
         tv_date = findViewById(R.id.tv_selected_ad_date);
         ad_call = findViewById(R.id.btn_selected_ad_call);
+        select_ad = findViewById(R.id.button3);
 
         tv_title.setText(title);
         tv_location.setText(location);
@@ -115,6 +117,18 @@ public class ViewSelectedAd extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: +94" +  contact));
                 startActivity(intent);
+            }
+        });
+
+        // Select button
+        select_ad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CustomerBuy.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("AD", adDet);
+
+                view.getContext().startActivity(intent);
             }
         });
 

@@ -24,6 +24,19 @@ public class Advertisement implements Serializable {
     @Exclude
     private String key;
     private String UID;
+    private Long dateDifference;
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Long getDateDifference() {
+        return dateDifference;
+    }
+
+    public void setDateDifference(Long dateDifference) {
+        this.dateDifference = dateDifference;
+    }
 
     public String getUID() {
         return UID;

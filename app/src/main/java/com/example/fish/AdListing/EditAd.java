@@ -34,6 +34,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.example.fish.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class EditAd extends AppCompatActivity {
 
     EditText et_new_ad_title, et_new_ad_price, et_new_ad_contact, et_new_ad_description;
@@ -224,6 +228,7 @@ public class EditAd extends AppCompatActivity {
             String price= et_new_ad_price.getText().toString();
             String contact = et_new_ad_contact.getText().toString();
             String description = et_new_ad_description.getText().toString();
+            String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
 
             // Check required fields
@@ -254,7 +259,7 @@ public class EditAd extends AppCompatActivity {
                 ad.setContact(Integer.valueOf(contact.trim()));
                 ad.setDescription(description.trim());
                 ad.setNegotiable(negotiable_value);
-                ad.setDate();
+                ad.setDate(date);
 
                 // Upload image to firebase and save database if main image upload success
                 uploadFirebase();

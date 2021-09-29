@@ -29,7 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import com.example.fish.AdListing.AdAdapter;
 import com.example.fish.AdListing.Advertisement;
@@ -114,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for(DataSnapshot ds: dataSnapshot.getChildren()) {
                         Advertisement ad = ds.getValue(Advertisement.class);
+                        assert ad != null;
                         ad.setKey(ds.getKey());
                         ad.setUID(dataSnapshot.getKey());
                         list.add(ad);
