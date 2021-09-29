@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Fish">
 
         <activity android:name=".UpdateSeller" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Delivery" />
         <activity android:name=".DeliveryConfirm" />
         <activity android:name=".UserAccount" />
         <activity android:name=".DelSearch" />
@@ -28,13 +28,14 @@
         <activity android:name=".AdListing.CreateNewAd"/>
         <activity android:name=".AdListing.EditAd"/>
 
-        <activity android:name=".Delivery"
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 

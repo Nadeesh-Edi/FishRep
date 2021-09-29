@@ -117,7 +117,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_ad_box_date"
-                android:textSize="11sp"
+                android:textSize="8sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_ad_box_price"
                 app:layout_constraintEnd_toEndOf="@+id/tv_ad_box_title"
                 tools:ignore="SmallSp" />
