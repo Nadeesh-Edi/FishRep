@@ -40,14 +40,29 @@
 
 
 <!-- Thirosh -->
+
+        <activity
+            android:name=".customer.search"
+            android:exported="true" >
+
+        </activity>
+
+        <activity
+            android:name=".customer.AddActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".customer.main_item"
+            android:exported="true"/>
+
+        <activity
+            android:name=".customer.ViewItem"
+            android:exported="true" />
         <activity
             android:name=".customer.CustomerFeedback"
             android:exported="true" />
         <activity
             android:name=".customer.Payment"
-            android:exported="true" />
-        <activity
-            android:name=".customer.RetriveDataActivity"
             android:exported="true" />
         <activity
             android:name=".customer.CustomerUpdate"
