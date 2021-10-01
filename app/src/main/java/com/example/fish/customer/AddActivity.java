@@ -23,6 +23,7 @@ public class AddActivity extends AppCompatActivity {
 
     EditText name,address,province,phone,packet,quantity;
     Button btnAdd, btnBack;
+    String contactPattern = "[0-9]{9,10}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +53,17 @@ public class AddActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(name.getText().toString()))
                     Toast.makeText(getApplicationContext(),"Fill Your Name", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(address.getText().toString()))
-                    Toast.makeText(getApplicationContext(),"Fill Your Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Fill Your Address", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(province.getText().toString()))
-                    Toast.makeText(getApplicationContext(),"Fill Your Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Fill Your Province", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(phone.getText().toString()))
-                    Toast.makeText(getApplicationContext(),"Fill Your Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Fill Your Phone", Toast.LENGTH_SHORT).show();
+                else if(!phone.getText().toString().trim().matches(contactPattern))
+                    Toast.makeText(getApplicationContext(),"Invalid Phone", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(quantity.getText().toString()))
-                    Toast.makeText(getApplicationContext(),"Fill Your Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Fill Quantity", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(packet.getText().toString()))
-                    Toast.makeText(getApplicationContext(),"Fill Your Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Fill Packets", Toast.LENGTH_SHORT).show();
                 else{
                     startActivity(new Intent(AddActivity.this, Payment.class));
                     Toast.makeText(getApplicationContext(),"Successfully.", Toast.LENGTH_SHORT).show();

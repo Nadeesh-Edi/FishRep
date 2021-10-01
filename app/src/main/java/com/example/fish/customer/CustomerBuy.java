@@ -94,9 +94,9 @@ public class CustomerBuy extends AppCompatActivity {
                     cus.setName(et_add_name.getText().toString().trim());
                     cus.setAddress(et_add_address.getText().toString().trim());
                     cus.setProvince(et_add_province.getText().toString().trim());
-                    cus.setPhone(Integer.valueOf(et_add_contact.getText().toString().trim()));
-                    cus.setPacket(Integer.valueOf(et_add_food.getText().toString().trim()));
-                    cus.setQuantity(Integer.valueOf(et_add_qty.getText().toString().trim()));
+                    cus.setPhone(et_add_contact.getText().toString().trim());
+                    cus.setPacket(et_add_food.getText().toString().trim());
+                    cus.setQuantity(et_add_qty.getText().toString().trim());
 
                     dbRef.push().setValue(cus);
 

@@ -1,8 +1,14 @@
 package com.example.fish.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fish.Delivery;
+import com.example.fish.MainActivity;
 import com.example.fish.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,5 +49,17 @@ public class CustomerFeedback extends AppCompatActivity {
 
             }
         });
+
+
     }
-}
+        public void SendFeedback(View view) {
+
+            try {
+
+                Toast.makeText(getApplicationContext(), "Thanks For Your Feedback", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(CustomerFeedback.this, MainActivity.class));
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Please Rate Us Now", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }

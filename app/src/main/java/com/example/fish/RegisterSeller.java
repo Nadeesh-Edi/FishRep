@@ -25,6 +25,7 @@ public class RegisterSeller extends AppCompatActivity {
     Seller seller;
     DatabaseReference dbRef;
     FirebaseAuth mAuth;
+    String contactPattern = "[0-9]{9,10}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class RegisterSeller extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter a NIC number", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(regPhone.getText().toString()))
                     Toast.makeText(getApplicationContext(), "Please enter a Contact number", Toast.LENGTH_SHORT).show();
+                else if(!regPhone.getText().toString().trim().matches(contactPattern))
+                    Toast.makeText(getApplicationContext(), "Please enter a valid Contact number", Toast.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(regEmail.getText().toString()))
                     Toast.makeText(getApplicationContext(), "Please enter an Email address", Toast.LENGTH_SHORT).show();
                 else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())

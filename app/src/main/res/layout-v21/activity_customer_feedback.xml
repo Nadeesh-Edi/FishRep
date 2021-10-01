@@ -71,10 +71,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="45dp"
-        android:textColor="@color/main_color"
         android:layout_marginTop="10dp"
         android:layout_marginRight="45dp"
         android:background="@drawable/blue_border_button"
-        android:text="@string/btn_feed" />
+        android:onClick="SendFeedback"
+        android:text="@string/btn_feed"
+        android:textColor="@color/main_color" />
 
 </LinearLayout>
