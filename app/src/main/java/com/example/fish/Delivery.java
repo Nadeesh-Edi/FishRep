@@ -36,12 +36,15 @@ public class Delivery extends AppCompatActivity {
 
     public void addDelivery(View view) {
         dbRef = FirebaseDatabase.getInstance().getReference().child("Delivery");
+        String contactPattern = "[0-9]{9,10}";
 
         try {
             if(TextUtils.isEmpty(orderID.getText().toString()))
                 Toast.makeText(getApplicationContext(), "Please enter an ID", Toast.LENGTH_SHORT).show();
             else if(TextUtils.isEmpty(phoneNo.getText().toString()))
                 Toast.makeText(getApplicationContext(), "Please enter a Phone Number", Toast.LENGTH_SHORT).show();
+            else if(!phoneNo.getText().toString().trim().matches(contactPattern))
+                Toast.makeText(getApplicationContext(), "Please enter a valid Contact number", Toast.LENGTH_SHORT).show();
             else if(TextUtils.isEmpty(DelAddress.getText().toString()))
                 Toast.makeText(getApplicationContext(), "Please enter an Address", Toast.LENGTH_SHORT).show();
             else if(TextUtils.isEmpty(DelDate.getText().toString()))

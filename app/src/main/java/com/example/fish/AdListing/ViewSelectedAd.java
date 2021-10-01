@@ -17,6 +17,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.fish.R;
 import com.example.fish.customer.CustomerBuy;
+import com.example.fish.customer.ViewItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -124,7 +125,7 @@ public class ViewSelectedAd extends AppCompatActivity {
         select_ad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CustomerBuy.class);
+                Intent intent = new Intent(view.getContext(), ViewItem.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("AD", adDet);
 

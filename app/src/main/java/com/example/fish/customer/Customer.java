@@ -4,9 +4,9 @@ public class Customer {
     private String name;
     private String address;
     private String province;
-    private Integer phone;
-    private Integer packet;
-    private Integer quantity;
+    private String phone;
+    private String packet;
+    private String quantity;
 
     public Customer(){
 
@@ -36,27 +36,27 @@ public class Customer {
         this.province = province;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Integer getPacket() {
+    public String getPacket() {
         return packet;
     }
 
-    public void setPacket(Integer packet) {
+    public void setPacket(String packet) {
         this.packet = packet;
     }
 
-    public Integer getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 }

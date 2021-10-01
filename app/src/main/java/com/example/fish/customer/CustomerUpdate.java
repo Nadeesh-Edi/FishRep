@@ -56,9 +56,9 @@ public class CustomerUpdate extends AppCompatActivity {
                         cus.setName(et_update_name.getText().toString().trim());
                         cus.setAddress(et_update_address.getText().toString().trim());
                         cus.setProvince(et_update_province.getText().toString().trim());
-                        cus.setPhone(Integer.valueOf(et_update_contact.getText().toString().trim()));
-                        cus.setPacket(Integer.valueOf(et_update_food.getText().toString().trim()));
-                        cus.setQuantity(Integer.valueOf(et_update_qty.getText().toString().trim()));
+                        cus.setPhone(et_update_contact.getText().toString().trim());
+                        cus.setPacket(et_update_food.getText().toString().trim());
+                        cus.setQuantity(et_update_qty.getText().toString().trim());
 
                         dbRef.push().setValue(cus);
 
