@@ -155,6 +155,7 @@ public class CreateNewAd extends AppCompatActivity {
         dbRef = FirebaseDatabase.getInstance().getReference().child(childRef);
 
         try{
+            String contactPattern = "[0-9]{9,10}";
             String title = et_new_ad_title.getText().toString();
             String location = select_location_search.getSelectedItem().toString();
             String price= et_new_ad_price.getText().toString();
@@ -176,6 +177,9 @@ public class CreateNewAd extends AppCompatActivity {
             }
             else if(TextUtils.isEmpty(contact)){
                 et_new_ad_contact.setError("Contact is required!");
+            }
+            else if(!contact.trim().matches(contactPattern)) {
+                et_new_ad_contact.setError("Invalid contact");
             }
             else if(TextUtils.isEmpty(description)){
                 et_new_ad_description.setError("Description is required!");
