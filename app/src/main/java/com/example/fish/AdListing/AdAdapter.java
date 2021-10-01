@@ -45,6 +45,8 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
+    public AdAdapter() {}
+
     public AdAdapter(Context context, ArrayList<Advertisement> list) {
         this.context = context;
         this.listFull = list;
@@ -134,7 +136,6 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     public Long getDateDifference(Date postedDate, Date currentDate) {
         long timeDiff = currentDate.getTime() - postedDate.getTime();
         TimeUnit time = TimeUnit.DAYS;
-
 
         return time.convert(timeDiff, time.MILLISECONDS);
     }

@@ -124,11 +124,10 @@ public class MainActivity extends AppCompatActivity {
                         ad.setUID(dataSnapshot.getKey());
                         list.add(ad);
                     }
-
-                    adAdapter = new AdAdapter(MainActivity.this, list);
-                    recyclerView.setAdapter(adAdapter);
-                    adAdapter.notifyDataSetChanged();
                 }
+                adAdapter = new AdAdapter(MainActivity.this, list);
+                recyclerView.setAdapter(adAdapter);
+                adAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.INVISIBLE);
             }
 
