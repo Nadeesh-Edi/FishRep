@@ -1,5 +1,4 @@
 package com.example.fish;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,8 +39,29 @@ public class DeliveryConfirm extends AppCompatActivity {
         Query query = FirebaseDatabase.getInstance().getReference().child("Delivery")
                 .orderByChild("orderID").equalTo(ordID);
         query.addListenerForSingleValueEvent(valueEventListener);
-
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            if(snapshot.hasChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    DeliveryOrder deliveryOrder = dataSnapshot.getValue(DeliveryOrder.class);
+
+                    orderID.setText(deliveryOrder.getOrderID());
+                    delDate.setText(deliveryOrder.getDelDate());
+                    deladdress.setText(deliveryOrder.getDelAddress());
+                }
+            }
+            else
+                Toast.makeText(getApplicationContext(), "No delivery to display", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            Toast.makeText(getApplicationContext(), "No Sources to display", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     public void deleteDelivery(View view) {
         Query query = FirebaseDatabase.getInstance().getReference().child("Delivery")
@@ -69,25 +89,4 @@ public class DeliveryConfirm extends AppCompatActivity {
         });
     }
 
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            if(snapshot.hasChildren()) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    DeliveryOrder deliveryOrder = dataSnapshot.getValue(DeliveryOrder.class);
-
-                    orderID.setText(deliveryOrder.getOrderID());
-                    delDate.setText(deliveryOrder.getDelDate());
-                    deladdress.setText(deliveryOrder.getDelAddress());
-                }
-            }
-            else
-                Toast.makeText(getApplicationContext(), "No delivery to display", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-            Toast.makeText(getApplicationContext(), "No Sources to display", Toast.LENGTH_SHORT).show();
-        }
-    };
 }

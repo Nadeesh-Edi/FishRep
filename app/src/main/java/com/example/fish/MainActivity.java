@@ -198,7 +198,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navClickOrders(View view) {
-
+        Intent openMainActivity = new Intent(getApplicationContext(), DelSearch.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void navClickProfile(View view) {

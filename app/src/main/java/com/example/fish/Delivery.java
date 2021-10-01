@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Delivery extends AppCompatActivity {
     EditText orderID, phoneNo, DelAddress, DelDate;
-    Button delBtn, mapBtn;
+    Button delBtn;
     DeliveryOrder del;
     DatabaseReference dbRef;
     public static final String ORDER_ID = "com.example.fish.MESSAGE";
@@ -30,7 +30,6 @@ public class Delivery extends AppCompatActivity {
         DelAddress = findViewById(R.id.DelAddress);
         DelDate = findViewById(R.id.DelDate);
         delBtn = findViewById(R.id.DelBtn);
-        mapBtn = findViewById(R.id.MapBtn);
 
         del = new DeliveryOrder();
     }

@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class DelSearch extends AppCompatActivity {
     EditText ordID;
-    Button search;
+    Button search, addBtn;
     public static final String ORDER_ID = "com.example.fish.MESSAGE";
 
     @Override
@@ -20,6 +20,7 @@ public class DelSearch extends AppCompatActivity {
 
         ordID = findViewById(R.id.SearchOrdID);
         search = findViewById(R.id.SearchDel);
+        addBtn = findViewById(R.id.addDel);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +29,13 @@ public class DelSearch extends AppCompatActivity {
                 String orderID = ordID.getText().toString().trim();
                 intent.putExtra(ORDER_ID, orderID);
                 startActivity(intent);
+            }
+        });
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DelSearch.this, Delivery.class));
             }
         });
     }
