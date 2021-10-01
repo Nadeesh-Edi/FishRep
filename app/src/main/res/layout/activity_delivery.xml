@@ -24,19 +24,6 @@
         app:layout_constraintVertical_bias="0.117" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:textColor="@color/main_color"
-        android:background="@drawable/blue_border_button"
-        android:id="@+id/MapBtn"
-        android:layout_width="252dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="328dp"
-        android:text="@string/MapBtnTxt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:textColor="#FF809B"
         android:background="@drawable/rose_border_button"
         android:id="@+id/DelBtn"
@@ -99,17 +86,17 @@
         android:layout_height="46dp"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
+        android:layout_marginBottom="292dp"
         android:ems="10"
         android:hint="@string/DelDatetxt"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MapBtn"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
